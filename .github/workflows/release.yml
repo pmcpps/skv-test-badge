@@ -1,4 +1,4 @@
-name: Release to npmjs.com
+name: Release
 on:
   release:
     types: [published]
@@ -32,6 +32,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+
+      - name: Install Dependencies
+        run: yarn install
 
       - name: Build Package
         run: |
