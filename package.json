@@ -1,8 +1,8 @@
 {
-  "name": "data-metrics-badge",
-  "version": "0.5.3",
+  "name": "skv-test-badge",
+  "version": "1.0.0",
   "private": false,
-  "author": "Kristian Garza <kgarza@datacite.org>",
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -75,10 +75,10 @@
     "> 1%",
     "last 2 versions"
   ],
-  "homepage": "https://github.com/datacite/spitz/#README.md",
+  "homepage": "https://github.com/pmcpps/skv-test-badge/#README.md",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/datacite/spitz.git"
+    "url": "git+https://github.com/pmcpps/skv-test-badge.git"
   }
 }
