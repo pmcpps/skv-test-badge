@@ -1,0 +1,57 @@
+name: Release to npmjs.com
+on:
+  release:
+    types: [published]
+jobs:
+  test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Run Test Suite
+        run: |
+          yarn test:unit tests/
+
+      - name: Test Package Build
+        run: |
+          yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
+
+  publish:
+    name: Release
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+
+      - name: Build Package
+        run: |
+          yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
+
+      - name: Set version
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          npm version ${{ github.event.release.tag_name }}
+
+          git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push gh-origin HEAD:master --tags
+
+      - name: Publish
+        run: |
+          npm set //registry.npmjs.org/:_authToken $NODE_AUTH_TOKEN
+          npm publish
+
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
