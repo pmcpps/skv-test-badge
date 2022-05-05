@@ -30,6 +30,10 @@ jobs:
       #   if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
-      - name: Test
+      - name: Run Test Suite
         run: |
           yarn test:unit tests/
+
+      - name: Test Compilation
+        run: |
+          yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
