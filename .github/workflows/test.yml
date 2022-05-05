@@ -20,6 +20,6 @@ jobs:
           run: |
             yarn test:unit tests/
 
-        - name: Test Compilation
+        - name: Test Package Build
           run: |
             yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
