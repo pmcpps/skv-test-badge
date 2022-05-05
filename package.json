@@ -1,0 +1,84 @@
+{
+  "name": "data-metrics-badge",
+  "version": "0.5.3",
+  "private": false,
+  "author": "Kristian Garza <kgarza@datacite.org>",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "test": "mocha-webpack --webpack-config webpack.config.js --require test/setup.js test/**/*.spec.js"
+  },
+  "main": "dist/data-metrics-badge.min.js",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.0.0-0",
+    "axios": "^0.19.0",
+    "core-js": "^2.5.7",
+    "vue": "^2.6.10",
+    "vue-axios": "^2.1.4",
+    "vue-vega": "^1.0.0-alpha.13",
+    "vuetify": "^2.1.12"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-plugin-unit-mocha": "^3.10.0",
+    "@vue/cli-service": "^3.8.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-eslint": "^10.0.3",
+    "chai": "^4.1.2",
+    "deepmerge": "^4.2.2",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-vue": "^6.0.1",
+    "fibers": "^4.0.2",
+    "jsdom": "^15.1.1",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^6.2.0",
+    "mocha-webpack": "^1.1.0",
+    "node-sass": "^4.13.1",
+    "null-loader": "^3.0.0",
+    "sass": "^1.23.7",
+    "sass-loader": "^7.0.0",
+    "vue-cli-plugin-vuetify": "^2.0.2",
+    "vue-svg-loader": "^0.12.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.4.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "homepage": "https://github.com/datacite/spitz/#README.md",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datacite/spitz.git"
+  }
+}
