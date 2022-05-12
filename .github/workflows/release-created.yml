@@ -24,5 +24,8 @@ jobs:
 
           npm version ${{ github.event.release.tag_name }}
 
+          git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push gh-origin HEAD:master --tags
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
