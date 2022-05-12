@@ -38,10 +38,6 @@ jobs:
         run: |
           yarn install
 
-      - name: Build Package
-        run: |
-          yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
-
       - name: Set version
         run: |
           git config --local user.email "action@github.com"
@@ -51,6 +47,10 @@ jobs:
 
           git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push gh-origin HEAD:master --tags
+
+      - name: Build Package
+        run: |
+          yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
 
       - name: Publish
         run: |
