@@ -14,6 +14,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          echo "Print release -  ${{ github.event.release.tag_name }}"
           yarn install
 
       - name: Set version
