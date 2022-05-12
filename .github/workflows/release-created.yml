@@ -4,28 +4,15 @@ on:
     types: [created]
 jobs:
   build:
-    name: Build Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v3
         with:
           node-version: '12'
-
-      - name: Install Dependencies
-        run: |
-          echo "Print release -  ${{ github.event.release.tag_name }}"
-          yarn install
-
-      - name: Set version
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
-          npm version ${{ github.event.release.tag_name }}
-
-          git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push gh-origin HEAD:master --tags
-
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
