@@ -16,6 +16,10 @@ jobs:
         run:  |
           yarn install
 
+      - name: Lint
+        run: |
+          npm run lint
+
       - name: Run Test Suite
         run: |
           yarn test:unit tests/
