@@ -19,6 +19,9 @@ jobs:
 
       - name: Set version
         run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
           npm version ${{ github.event.release.tag_name }}
 
         env:
