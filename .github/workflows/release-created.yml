@@ -19,13 +19,7 @@ jobs:
 
       - name: Set version
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-
           npm version ${{ github.event.release.tag_name }}
-
-          git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push gh-origin HEAD:master
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
