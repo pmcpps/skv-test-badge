@@ -3,15 +3,29 @@ on:
   release:
     types: [created]
 jobs:
-  test:
-    name: Build and Test
+  build:
+    name: Build Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - run: echo "Print release -  ${{ github.event.release.tag_name }}"
-      - run: echo "Print a single environment variable (the commit SHA ) - ${{ github.sha }} "
-      - run: echo "Print all environment variables"
-      - run: env
+
+      - name: Install Dependencies
+        run: |
+          yarn install
+
+      - name: Set version
+        run: |
+
+          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+          git pull github ${GITHUB_REF} --ff-only
+
+          git add package.json
+
+          git commit -m "Update package version"
+          git push github HEAD:${GITHUB_REF}
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
