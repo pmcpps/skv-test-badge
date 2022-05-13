@@ -30,6 +30,7 @@ jobs:
       - name: Version Check Results
         run: |
           MY_STRING=$(cat << EOF
+
             OK! VERSION CHECK SUCCEEDED!!!
           EOF
           )
@@ -91,5 +92,4 @@ jobs:
 #           npm publish
 
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
