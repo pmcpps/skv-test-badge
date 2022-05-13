@@ -11,12 +11,15 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '12'
+          always-auth: true
+
+      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > ~/.npmrc
 
       - run: |
           echo "Print release -  ${{ github.event.release.tag_name }}"
           yarn install
           yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
-          
+
       - run: |
           yarn publish
 
