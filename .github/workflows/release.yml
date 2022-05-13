@@ -23,7 +23,6 @@ jobs:
       - name: match-tag-to-package-version
         id: match-tag-to-package-version
         uses: geritol/match-tag-to-package-version@0.2.0
-        run: echo "${{ steps.match-tag-to-package-version.outputs.value }}"
 
       - name: Version Check Sucess
         run: echo "VERSION CHECK SUCCEEDED..."
