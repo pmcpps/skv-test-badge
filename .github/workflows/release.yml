@@ -15,7 +15,7 @@ jobs:
           MY_STRING=$(cat << EOF
 
           If version checking fails, you must do one of the following
-            1) Invoke the 'bump' github workflow to set the package.version to the desired release tag value
+            1) Manually invoke the 'bump' github workflow to set the package.version to the desired release tag value
             2) Edit package.json to set the version field to the release tag, and then commit that change.
           If version checking passes, you will see "OK! VERSION CHECK SUCCEEDED!!!"
           EOF
