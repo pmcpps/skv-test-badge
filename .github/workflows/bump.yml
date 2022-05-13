@@ -19,10 +19,11 @@ jobs:
 
       - name: Set package.json version
         run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
           npm config set tag-version-prefix ''
           npm version ${{ github.event.inputs.releaseTag }} -no-git-tag-version
 
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
           git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           git push gh-origin HEAD:master --tags
