@@ -10,7 +10,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Version Check
+      - name: Version Check Instructions
         run: |
           MY_STRING=$(cat << EOF
           If version checking fails :
@@ -18,11 +18,12 @@ jobs:
             Or, edit package.json to set the version to the release tag, and then commit that change.
           EOF
           )
-          echo "::set-output name=content::$MY_STRING"
+          echo "::set-debug name=content::$MY_STRING"
 
       - name: match-tag-to-package-version
         id: match-tag-to-package-version
         uses: geritol/match-tag-to-package-version@0.2.0
+        if: always()
 
       - name: Version Check Sucess
         run: echo "VERSION CHECK SUCCEEDED..."
