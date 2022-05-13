@@ -4,7 +4,7 @@ on:
     types: [published]
 
 jobs:
-  version:
+  version-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,7 +38,7 @@ jobs:
 
   test:
     name: Build and Test
-    needs: [version]
+    needs: [version-check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
