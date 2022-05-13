@@ -14,15 +14,17 @@ jobs:
         uses: geritol/match-tag-to-package-version@0.2.0
 
       - name: Check package.version is consistent with release tag
-        if: steps.match-tag-to-package-version.outcome == 1
-        run: |
-          MY_STRING=$(cat << EOF
-          Please manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
-          This can also be done by directly editing package.json to set the version to the release tag, and then commiting that change.
-          EOF
-          )
-          echo "::set-output name=content::$MY_STRING"
-          exit 1
+        run: echo "${{ steps.match-tag-to-package-version.outputs.value }}"
+
+#         if: steps.match-tag-to-package-version.outcome == 1
+#         run: |
+#           MY_STRING=$(cat << EOF
+#           Please manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
+#           This can also be done by directly editing package.json to set the version to the release tag, and then commiting that change.
+#           EOF
+#           )
+#           echo "::set-output name=content::$MY_STRING"
+#           exit 1
   test:
     name: Build and Test
     needs: [version]
