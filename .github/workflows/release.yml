@@ -14,7 +14,7 @@ jobs:
         uses: geritol/match-tag-to-package-version@0.2.0
 
       - name: Check package.version is consistent with release tag
-        if: steps.match-tag-to-package-version.outcome != 'success'
+        if: steps.match-tag-to-package-version.outcome == 1
         run: |
           MY_STRING=$(cat << EOF
           Please manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
