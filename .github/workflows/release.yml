@@ -13,7 +13,7 @@ jobs:
       - name: Version Check
         run: |
           MY_STRING=$(cat << EOF
-          If version checking fails:
+          If version checking fails :
             Manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
             Or, edit package.json to set the version to the release tag, and then commit that change.
           EOF
