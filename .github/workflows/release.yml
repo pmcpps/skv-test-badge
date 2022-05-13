@@ -13,30 +13,26 @@ jobs:
       - name: Version Check Instructions
         run: |
           MY_STRING=$(cat << EOF
-          If version checking fails :
-            Manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
-            Or, edit package.json to set the version to the release tag, and then commit that change.
+          If version checking fails, you must one of the following:
+            - Invoke the 'bump' github workflow to set the package.version to the desired release tag value
+            - Edit package.json to set the version field to the release tag, and then commit that change.
           EOF
           )
-          echo "::set-debug name=content::$MY_STRING"
+          echo "::set-output name=content::$MY_STRING"
 
       - name: match-tag-to-package-version
         id: match-tag-to-package-version
         uses: geritol/match-tag-to-package-version@0.2.0
         if: always()
 
-      - name: Version Check Sucess
-        run: echo "VERSION CHECK SUCCEEDED..."
+      - name: Version Check Results
+        run: |
+          MY_STRING=$(cat << EOF
+            OK! VERSION CHECK SUCCEEDED!!!
+          EOF
+          )
+          echo "::set-output name=content::$MY_STRING"
 
-#         if: steps.match-tag-to-package-version.outcome == 1
-#         run: |
-#           MY_STRING=$(cat << EOF
-#           Please manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
-#           This can also be done by directly editing package.json to set the version to the release tag, and then commiting that change.
-#           EOF
-#           )
-#           echo "::set-output name=content::$MY_STRING"
-#           exit 1
   test:
     name: Build and Test
     needs: [version]
