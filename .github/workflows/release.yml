@@ -9,12 +9,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
+      - name: Version Check
+        run: |
+          MY_STRING=$(cat << EOF
+          If version checking fails:
+            Manually invoke the 'bump' workflow to bump the package.version to the desired release tag value
+            Or, edit package.json to set the version to the release tag, and then commit that change.
+          EOF
+          )
+          echo "::set-output name=content::$MY_STRING"
+
       - name: match-tag-to-package-version
         id: match-tag-to-package-version
         uses: geritol/match-tag-to-package-version@0.2.0
-
-      - name: Check package.version is consistent with release tag
         run: echo "${{ steps.match-tag-to-package-version.outputs.value }}"
+
+      - name: Version Check Sucess
+        run: echo "VERSION CHECK SUCCEEDED..."
 
 #         if: steps.match-tag-to-package-version.outcome == 1
 #         run: |
