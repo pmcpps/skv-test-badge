@@ -12,11 +12,13 @@ jobs:
         with:
           node-version: '12'
 
-      - name: Install Dependencies
-        run: |
+      - run: |
           echo "Print release -  ${{ github.event.release.tag_name }}"
           yarn install
           yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
+          
+      - run: |
+          yarn publish
 
         env:
            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
