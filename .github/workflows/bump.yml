@@ -4,7 +4,7 @@ on:
     inputs:
       releaseTag:
         description: 'Release tag'
-        required: false
+        required: true
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,6 +28,7 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
+          npm config set tag-version-prefix ''
           npm version ${{ github.event.inputs.releaseTag }}
 
           # git add package.json
