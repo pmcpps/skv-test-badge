@@ -30,6 +30,12 @@ jobs:
 
           git push origin master --tags
 
-          git tag
-          echo "GOT HERE!"
-          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+      - name: Success Summary
+        if: ${{ success() }}
+        run: |
+          echo "### Package version bumped to:  ${{ github.event.inputs.releaseTag }}.  Release tag created." >> $GITHUB_STEP_SUMMARY
+
+      - name: Failure Summary
+        if: ${{ failure() }}
+        run: |
+          echo "### UNABLE TO BUMP VERSION/RELEASE TAG:  ${{ github.event.inputs.releaseTag }}." >> $GITHUB_STEP_SUMMARY
