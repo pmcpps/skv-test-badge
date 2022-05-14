@@ -22,15 +22,17 @@ jobs:
 
       - name: Set package.json version
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          # git config --local user.email "action@github.com"
+          # git config --local user.name "GitHub Action"
+
+          git config user.name github-actions
+          git config user.email github-actions@github.com
 
           npm version ${{ github.event.inputs.releaseTag }} -no-git-tag-version
           
-          git add package.json
-          git commit -m "Adding lupo git variables for tag ${{ steps.extract_variables.outputs.GIT_TAG }}"
-                    git add .
-          git commit -m "Update package.json version field to ${{ github.event.inputs.releaseTag }}"
+          git add .
+          git commit -m "generated"
           git push
+          
           git tags
           echo "GOT HERE!"
