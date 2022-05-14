@@ -33,6 +33,6 @@ jobs:
           git add .
           git commit -m "generated"
           git push
-          
-          git tags
+
+          git tag
           echo "GOT HERE!"
