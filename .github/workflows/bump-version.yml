@@ -32,4 +32,4 @@ jobs:
 
           git tag
           echo "GOT HERE!"
-          echo "{markdown content}" >> $GITHUB_STEP_SUMMARY
+          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
