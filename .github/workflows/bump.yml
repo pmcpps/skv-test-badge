@@ -4,7 +4,7 @@ on:
     inputs:
       releaseTag:
         description: 'Release tag'
-        required: true
+        required: false
 
 env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,9 +30,9 @@ jobs:
 
           npm version ${{ github.event.inputs.releaseTag }}
 
-          git add package.json
-          git commit -m "generated"
-          git push
+          # git add package.json
+          # git commit -m "generated"
+          git push origin master --tags
 
           git tag
           echo "GOT HERE!"
