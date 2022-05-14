@@ -3,12 +3,15 @@ on:
   release:
     types: [published]
 
+env:
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   version-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Version Check Instructions
         run: |
@@ -41,7 +44,7 @@ jobs:
     needs: [version-check]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
@@ -58,38 +61,25 @@ jobs:
         run: |
           yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
 
-#   publish:
-#     name: Release
-#     needs: [test]
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v2
-#         with:
-#           node-version: '12'
-#
-#       - name: Install Dependencies
-#         run: |
-#           yarn install
-#
-#       - name: Build Package
-#         run: |
-#           yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
+  publish:
+    name: Release
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
 
-      # - name: Set version
-      #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
-      #
-      #     npm version ${{ github.event.release.tag_name }}
-      #
-      #     git remote add gh-origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-      #     git push gh-origin HEAD:master --tags
+      - name: Install Dependencies
+        run: |
+          yarn install
 
-#       - name: Publish
-#         run: |
-#           npm set //registry.npmjs.org/:_authToken $NODE_AUTH_TOKEN
-#           npm publish
+      - name: Build Package
+        run: |
+          yarn build --target wc --name data-metrics-badge 'src/components/DataMetricsBadge.vue'
 
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish
+        run: |
+          npm set //registry.npmjs.org/:_authToken $NODE_AUTH_TOKEN
+          npm publish
