@@ -1,4 +1,4 @@
-name: Bump version
+name: Bump Version
 on:
   workflow_dispatch:
     inputs:
@@ -22,18 +22,14 @@ jobs:
 
       - name: Set package.json version
         run: |
-          # git config --local user.email "action@github.com"
-          # git config --local user.name "GitHub Action"
-
           git config user.name github-actions
           git config user.email github-actions@github.com
 
           npm config set tag-version-prefix ''
-          npm version ${{ github.event.inputs.releaseTag }}
+          npm version ${{ github.event.inputs.releaseTag }} -m "Bump version to ${{ github.event.inputs.releaseTag }}"
 
-          # git add package.json
-          # git commit -m "generated"
           git push origin master --tags
 
           git tag
           echo "GOT HERE!"
+          echo "{markdown content}" >> $GITHUB_STEP_SUMMARY

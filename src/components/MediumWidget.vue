@@ -7,7 +7,7 @@
       <div>
         <mediumBadge
           class="medium-badge"
-          :alt="this.alt"
+          :alt="alt"
         />
       </div>
 
