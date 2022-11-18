@@ -50,7 +50,8 @@
     "vue-template-compiler": "^2.6.10",
     "vuetify-loader": "^1.4.3",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "canvas-prebuilt": "2.0.0-alpha.14"
   },
   "eslintConfig": {
     "root": true,
