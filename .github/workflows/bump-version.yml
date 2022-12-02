@@ -18,13 +18,7 @@ jobs:
 
       - name: Set package.json version
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
-          npm config set tag-version-prefix ''
-          npm version ${{ github.event.release.tag_name }}. -m "Bump version to ${{ github.event.release.tag_name }}."
-
-          git push origin master --tags
+          echo "### Package version bumped to:  ${{ github.event.release.tag_name }}."
 
       - name: Success Summary
         if: ${{ success() }}
