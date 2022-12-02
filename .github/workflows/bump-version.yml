@@ -29,9 +29,9 @@ jobs:
       - name: Success Summary
         if: ${{ success() }}
         run: |
-          echo "### Package version bumped to:  ${{ github.event.inputs.releaseTag }}.  Release tag created." >> $GITHUB_STEP_SUMMARY
+          echo "### Package version bumped to:  ${{ github.event.inputs.releaseTag }}.  Release tag created."
 
       - name: Failure Summary
         if: ${{ failure() }}
         run: |
-          echo "### Unable to bump version/release tag to:  ${{ github.event.inputs.releaseTag }}." >> $GITHUB_STEP_SUMMARY
+          echo "### Unable to bump version/release tag to:  ${{ github.event.inputs.releaseTag }}."
