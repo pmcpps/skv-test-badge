@@ -1,10 +1,6 @@
 name: Bump Version
 on:
   workflow_dispatch:
-    inputs:
-      releaseTag:
-        description: 'Release tag'
-        required: true
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -16,9 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Set package.json version
         run: |
