@@ -18,6 +18,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
+          
+      - uses: ctrlaltdev/latest-release-json-action@latest
+        with:
+          releases: '[...]'
 
       - name: Set package.json version
         run: |
