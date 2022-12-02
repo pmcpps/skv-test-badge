@@ -18,12 +18,12 @@ jobs:
 
       - name: Set package.json version
         run: |
-          echo "### Package version bumped to:  ${{ github.event.release.tag_name }}."
+          echo "### Package version bumped to:  ${{ github.ref_name }}."
 
       - name: Success Summary
         if: ${{ success() }}
         run: |
-          echo "### Package version bumped to:  ${{ github.event.release.tag_name }}.  Release tag created."
+          echo "### Package version bumped to:  ${{ github.ref_name }}.  Release tag created."
 
       - name: Failure Summary
         if: ${{ failure() }}
