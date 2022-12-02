@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '14'
           
-      - uses: ctrlaltdev/latest-release-json-action@latest
+      - uses: actions/ctrlaltdev/latest-release-json-action@latest
         with:
           releases: '[...]'
 
