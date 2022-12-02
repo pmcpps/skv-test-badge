@@ -1,6 +1,9 @@
 name: Bump Version
 on:
   workflow_dispatch:
+  
+  release:
+    types: [published]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
