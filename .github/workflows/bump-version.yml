@@ -22,16 +22,16 @@ jobs:
           git config user.email github-actions@github.com
 
           npm config set tag-version-prefix ''
-          npm version ${{ github.event.inputs.releaseTag }} -m "Bump version to ${{ github.event.inputs.releaseTag }}"
+          npm version ${{ github.event.release.tag_name }}. -m "Bump version to ${{ github.event.release.tag_name }}."
 
           git push origin master --tags
 
       - name: Success Summary
         if: ${{ success() }}
         run: |
-          echo "### Package version bumped to:  ${{ github.event.inputs.releaseTag }}.  Release tag created."
+          echo "### Package version bumped to:  ${{ github.event.release.tag_name }}.  Release tag created."
 
       - name: Failure Summary
         if: ${{ failure() }}
         run: |
-          echo "### Unable to bump version/release tag to:  ${{ github.event.inputs.releaseTag }}."
+          echo "### Unable to bump version/release tag to:  $${{ github.event.release.tag_name }}."
