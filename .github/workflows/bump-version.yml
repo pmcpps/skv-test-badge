@@ -13,6 +13,11 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     steps:
+    
+    # GET BRANCH NAME:
+    - name: Set package.json version
+      run: |
+        echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
 
     # https://github.com/marketplace/actions/find-latest-tag
     - uses: oprypin/find-latest-tag@v1
@@ -20,6 +25,9 @@ jobs:
         repository: pmcpps/skv-test-badge  # The repository to scan.
         releases-only: true  # We know that all relevant tags have a GitHub release for them.
       id: octokit  # The step ID to refer to later.
+
+    - run: |
+        echo "### CURRENT BRANCH NAME:  ${{ steps.octokit.outputs.tag }}."
 
     - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
     
