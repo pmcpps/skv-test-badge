@@ -72,7 +72,6 @@ jobs:
         echo "release: ${{ steps.last_release.outputs.release }}"   
         echo "---------------------------------------"
         echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-        echo "${{ GITHUB_ENV }}"
 
     - name: Set package.json version
       run: |
