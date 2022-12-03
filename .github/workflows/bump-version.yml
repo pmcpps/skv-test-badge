@@ -28,6 +28,8 @@ jobs:
 
     - run: |
         echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
+        
+    - run: |
         echo "### LATEST RELEASE TAG:  ${{ steps.octokit.outputs.tag }}."
 
     - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
