@@ -27,7 +27,8 @@ jobs:
       id: octokit  # The step ID to refer to later.
 
     - run: |
-        echo "### CURRENT BRANCH NAME:  ${{ steps.octokit.outputs.tag }}."
+        echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
+        echo "### LATEST RELEASE TAG:  ${{ steps.octokit.outputs.tag }}."
 
     - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
     
