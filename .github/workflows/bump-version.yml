@@ -13,6 +13,16 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     steps:
+
+    # https://github.com/marketplace/actions/find-latest-tag
+    - uses: oprypin/find-latest-tag@v1
+      with:
+        repository: pmcpps/skv-test-badge  # The repository to scan.
+        releases-only: true  # We know that all relevant tags have a GitHub release for them.
+      id: octokit  # The step ID to refer to later.
+
+    - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
+    
     - name: Git checkout
       uses: actions/checkout@v3
       with:
