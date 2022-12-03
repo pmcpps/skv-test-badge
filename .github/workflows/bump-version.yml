@@ -26,6 +26,9 @@ jobs:
         git status
         git tag
         git describe
+        echo "-------------------------"
+        git rev-list --tags --max-count=1
+        git rev-list --tags --max-count=1 | git describe --tags {}
     
     - name: "Setup Node"
       uses: actions/setup-node@v3
