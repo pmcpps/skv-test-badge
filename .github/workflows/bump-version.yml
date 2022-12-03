@@ -19,6 +19,10 @@ jobs:
         with:
           node-version: '14'
 
+      - name: "command output"
+        id: command_output
+        run: git tag | sort -V | tail -1
+
       - name: "call action"
         id: last_release
         uses: InsonusK/get-latest-release@v1.0.1
