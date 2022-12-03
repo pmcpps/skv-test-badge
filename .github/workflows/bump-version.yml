@@ -29,6 +29,7 @@ jobs:
         echo "-------------------------"
         git rev-list --tags --max-count=1
         git rev-list --tags --max-count=1 | git describe --tags
+        git tag --sort=committerdate | grep -E '^[0-9]' | tail -1
     
     - name: "Setup Node"
       uses: actions/setup-node@v3
