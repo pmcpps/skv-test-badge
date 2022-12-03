@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: '0'
-    - name: git
+    - name: Git commands
       run: |
         # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
         git --version
@@ -27,47 +27,48 @@ jobs:
         git tag
         git describe
     
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
+    - name: "Setup Node"
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
         
-      - name: Retrieve version
-        id: version
-        run: |
-          echo "TAG_NAME=$(git tag | sort -V | tail -1)" >> $GITHUB_OUTPUT
+    - name: "Retrieve version"
+      id: version
+      run: |
+        echo "TAG_NAME=$(git tag | sort -V | tail -1)" >> $GITHUB_OUTPUT
         
-      - name: Print Release
-        id: print_release
-        run: |
-          echo "RELEASE TAG IS: ${{ steps.version.outputs.TAG_NAME }}"
+    - name: Print Release
+      id: print_release
+      run: |
+        echo "RELEASE TAG IS: ${{ steps.version.outputs.TAG_NAME }}"
 
-      - name: "call action"
-        id: last_release
-        uses: InsonusK/get-latest-release@v1.0.1
-        with:
-          myToken: ${{ github.token }}
-          exclude_types: ""
-          view_top: 1
-      - name: "Print result"
-        run: |
-          echo "id: ${{ steps.last_release.outputs.id }}"
-          echo "name: ${{ steps.last_release.outputs.name }}"
-          echo "tag_name: ${{ steps.last_release.outputs.tag_name }}"
-          echo "created_at: ${{ steps.last_release.outputs.created_at }}"
-          echo "draft: ${{ steps.last_release.outputs.draft }}"
-          echo "prerelease: ${{ steps.last_release.outputs.prerelease }}"         
-          echo "release: ${{ steps.last_release.outputs.release }}"         
+    - name: "call action"
+      id: last_release
+      uses: InsonusK/get-latest-release@v1.0.1
+      with:
+        myToken: ${{ github.token }}
+        exclude_types: ""
+        view_top: 1
+    - name: "Print result"
+      run: |
+        echo "id: ${{ steps.last_release.outputs.id }}"
+        echo "name: ${{ steps.last_release.outputs.name }}"
+        echo "tag_name: ${{ steps.last_release.outputs.tag_name }}"
+        echo "created_at: ${{ steps.last_release.outputs.created_at }}"
+        echo "draft: ${{ steps.last_release.outputs.draft }}"
+        echo "prerelease: ${{ steps.last_release.outputs.prerelease }}"         
+        echo "release: ${{ steps.last_release.outputs.release }}"         
 
-      - name: Set package.json version
-        run: |
-          echo "### Package version bumped to:  ${{ github.ref_name }}."
+    - name: Set package.json version
+      run: |
+        echo "### Package version bumped to:  ${{ github.ref_name }}."
 
-      - name: Success Summary
-        if: ${{ success() }}
-        run: |
-          echo "### Package version bumped to:  ${{ github.ref_name }}.  Release tag created."
+    - name: Success Summary
+      if: ${{ success() }}
+      run: |
+        echo "### Package version bumped to:  ${{ github.ref_name }}.  Release tag created."
 
-      - name: Failure Summary
-        if: ${{ failure() }}
-        run: |
-          echo "### Unable to bump version/release tag to:  $${{ github.event.release.tag_name }}."
+    - name: Failure Summary
+      if: ${{ failure() }}
+      run: |
+        echo "### Unable to bump version/release tag to:  $${{ github.event.release.tag_name }}."
