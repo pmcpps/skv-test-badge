@@ -18,6 +18,16 @@ jobs:
     - name: Set package.json version
       run: |
         echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
+        
+    - name: Extract variables
+      shell: bash
+      run: |
+        echo "BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+        echo "TAG::$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
+        echo "GIT_SHA::$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+        echo "GIT_SHA_SHORT::$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "MESSAGE::$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
+      id: extract_variables
 
     # https://github.com/marketplace/actions/find-latest-tag
     - uses: oprypin/find-latest-tag@v1
