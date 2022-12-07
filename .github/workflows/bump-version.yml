@@ -50,11 +50,12 @@ jobs:
       id: extract_variables     
       
     - name: Print variables
-      run: echo ${{ steps.extract_variables.outputs.BRANCH }}
-      run: echo ${{ steps.extract_variables.outputs.TAG }}
-      run: echo ${{ steps.extract_variables.outputs.GIT_SHA }}
-      run: echo ${{ steps.extract_variables.outputs.GIT_SH_SHORT }}
-      run: echo ${{ steps.extract_variables.outputs.MESSAGE }}
+      run: |
+        echo ${{ steps.extract_variables.outputs.BRANCH }}
+        echo ${{ steps.extract_variables.outputs.TAG }}
+        echo ${{ steps.extract_variables.outputs.GIT_SHA }}
+        echo ${{ steps.extract_variables.outputs.GIT_SH_SHORT }}
+        echo ${{ steps.extract_variables.outputs.MESSAGE }}
 
     - name: Git commands
       run: |
