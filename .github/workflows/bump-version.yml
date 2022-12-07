@@ -47,7 +47,14 @@ jobs:
         echo "GIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
         echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
-      id: extract_variables        
+      id: extract_variables     
+      
+    - name: Print variables
+      run: echo ${{ steps.extract_variables.outputs.BRANCH }}
+      run: echo ${{ steps.extract_variables.outputs.TAG }}
+      run: echo ${{ steps.extract_variables.outputs.GIT_SHA }}
+      run: echo ${{ steps.extract_variables.outputs.GIT_SH_SHORT }}
+      run: echo ${{ steps.extract_variables.outputs.MESSAGE }}
 
     - name: Git commands
       run: |
