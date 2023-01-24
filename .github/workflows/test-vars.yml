@@ -16,9 +16,8 @@ jobs:
         if: ${{ github.event.inputs.vercelBuildWithoutCache  == 'true' }}
         run: |
           echo -e "Vercel Build Without Cache: ${{ github.event.inputs.vercelBuildWithoutCache }}"
-          echo -e "VERCEL_ARGS=--force" >> $GITHUB_ENV
-          echo -e "TEST_ARGS=XXX" >> $GITHUB_ENV
-          echo -e "BUILD WITHOUT CACHE!! ${{env.VERCEL_ARGS}}"
+          echo "VERCEL_ARGS=--force" >> $GITHUB_ENV
+          echo "TEST_ARGS=XXX" >> $GITHUB_ENV
       - name: print env vars
         run: 
           echo -e "TEST_ARGS = ${{env.TEST_ARGS}}"
