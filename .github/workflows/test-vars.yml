@@ -1,3 +1,4 @@
+name: TEST VARS
 on: 
   workflow_dispatch:
     inputs:
