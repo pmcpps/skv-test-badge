@@ -5,6 +5,9 @@ on:
       vercelBuildWithoutCache:
         description: 'Vercel Build Without Cache'     
         default: 'false'
+jobs:
+  build:
+    name: printVars
 
      
      
