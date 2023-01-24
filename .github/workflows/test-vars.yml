@@ -6,6 +6,8 @@ on:
       vercelBuildWithoutCache:
         description: 'Vercel Build Without Cache'     
         default: 'false'
+env:
+  VERCEL_ARGS: ""
 jobs:
   printInputs:
     runs-on: ubuntu-latest
