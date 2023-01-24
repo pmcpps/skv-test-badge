@@ -12,13 +12,15 @@ jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ github.event.inputs.vercelBuildWithoutCache  == 'true' }}
+      - name: set env vars
+        if: ${{ github.event.inputs.vercelBuildWithoutCache  == 'true' }}
         run: |
           echo -e "Vercel Build Without Cache: ${{ github.event.inputs.vercelBuildWithoutCache }}"
           echo -e "VERCEL_ARGS='--force'" >> $GITHUB_ENV
           echo -e "TEST_ARGS=XXX" >> $GITHUB_ENV
           echo -e "BUILD WITHOUT CACHE!! ${{env.VERCEL_ARGS}}"
-      - run: 
+      - name: print env vars
+        run: 
           echo -e "TEST_ARGS = ${{env.TEST_ARGS}}"
           echo -e "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
           echo -e "DONE WITH JOB"
