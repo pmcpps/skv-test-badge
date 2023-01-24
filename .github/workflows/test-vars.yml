@@ -19,5 +19,6 @@ jobs:
           echo "TEST_ARGS=XXX" >> $GITHUB_ENV
           echo "BUILD WITHOUT CACHE!! ${{env.VERCEL_ARGS}}"
       - run: 
-          echo "TEST_ARGS =  ${{env.TEST_ARGS}}
+          echo "TEST_ARGS = ${{env.TEST_ARGS}}"
+          echo "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
           echo "DONE WITH JOB"
