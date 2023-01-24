@@ -1,7 +1,11 @@
-
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on: 
+  workflow_dispatch:
+    inputs:
+      vercelBuildWithoutCache:
+        description: 'Vercel Build Without Cache'     
+        default: 'false'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
