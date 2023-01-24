@@ -9,15 +9,9 @@ on:
 jobs:
   printInputs:
     runs-on: ubuntu-latest
-    steps:
-    - run: |
+    if: ${{ github.event.inputs.vercelBuildWithoutCache }} == 'true' || ${{ github.event.inputs.vercelBuildWithoutCache }} == '1'
+      run: |
         echo "Vercel Build Without Cache: ${{ github.event.inputs.vercelBuildWithoutCache }}"
-        if: |
-          ${{ github.event.inputs.vercelBuildWithoutCache }} == 'true' ||
-          ${{ github.event.inputs.vercelBuildWithoutCache }} == '1' ; 
-          echo "VERCEL_ARGS='--force'" >> $GITHUB_ENV
-          echo "BUILD WITHOUT CACHE!! ${{env.VERCEL_ARGS}}"
-        else
-          echo "BUILD WITH CACHE!!"
-        fi
-        
+        echo "VERCEL_ARGS='--force'" >> $GITHUB_ENV
+        echo "BUILD WITHOUT CACHE!! ${{env.VERCEL_ARGS}}"
+
