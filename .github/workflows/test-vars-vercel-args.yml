@@ -13,9 +13,9 @@ jobs:
     steps:
     - name: print env vars
       run: |
-        echo -e "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
-        echo -e "VERCEL_ARGS_1 = ${{env.VERCEL_ARGS_1}}"
+        echo -e "VERCEL_ARGS = ${{vars.VERCEL_ARGS}}"
+        echo -e "VERCEL_ARGS_1 = ${{vars.VERCEL_ARGS_1}}"
     - name: print env vars - AGAIN
       run: |
-        echo -e "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
-        echo -e "VERCEL_ARGS_1 = ${{env.VERCEL_ARGS_1}}"
+        echo -e "VERCEL_ARGS = ${{vars.VERCEL_ARGS}}"
+        echo -e "VERCEL_ARGS_1 = ${{vars.VERCEL_ARGS_1}}"
