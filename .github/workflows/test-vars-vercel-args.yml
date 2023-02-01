@@ -6,11 +6,17 @@ on:
     #  vercelBuildWithoutCache:
     #    description: 'Vercel Build Without Cache'     
     #    default: 'false'
-
+env:
+  VERCEL_ARGS: ""
+  
 jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
+    - name: set VERCEL_ARGS
+      run: |
+        echo "VERCEL_ARGS=--force" >> $GITHUB_ENV
+      if: ${{ vars.VERCEL_NOCACHE  == 'true' }}
     - name: print env vars
       run: |
         echo -e "VERCEL_ARGS = ${{vars.VERCEL_ARGS}}"
