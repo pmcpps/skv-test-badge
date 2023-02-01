@@ -13,6 +13,9 @@ jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
+    - name: ternary
+      run: |
+        echo -e "TERNARY: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}"
     - name: set VERCEL_ARGS
       run: |
         echo "VERCEL_ARGS=--force" >> $GITHUB_ENV
