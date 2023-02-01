@@ -1,0 +1,20 @@
+name: GitHub Actions Demo - vercel_args
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: 
+  workflow_dispatch:
+    #inputs:
+    #  vercelBuildWithoutCache:
+    #    description: 'Vercel Build Without Cache'     
+    #    default: 'false'
+
+jobs:
+  printInputs:
+    runs-on: ubuntu-latest
+      - name: print env vars
+        run: 
+          echo -e "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
+          echo -e "VERCEL_ARGS_1 = ${{env.VERCEL_ARGS_1}}"
+      - name: print env vars - AGAIN
+        run: 
+          echo -e "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
+          echo -e "VERCEL_ARGS_1 = ${{env.VERCEL_ARGS_1}}"
