@@ -1,0 +1,14 @@
+name: Build/Deploy Branch to Staging
+on:
+  workflow_dispatch:
+env:
+  RACK_ENV: stage
+  ENV_FILE: .env.stage
+
+jobs:
+  call_build_and_cache:
+    uses: ./.github/workflows/build.yml
+    with:
+      rack_env: $RACK_ENV
+      env_file: $ENV_FILE
+    secrets: inherit
