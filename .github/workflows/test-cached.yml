@@ -18,7 +18,14 @@ jobs:
           echo "Exposing env vars"
           echo "RACK_ENV: ${{ env.ENV_FILE }}"
           echo "ENV_FILE: ${{ env.ENV_FILE }}"
-          
+          mkdir build
+          echo "Hello world!" > "build/hello.txt"
+          cat build/hello.txt
+      - uses: actions/cache@v3
+        with:
+          path: build
+          key: some-key
+
   invoke-workflow:
     needs: vars
     name: "Workflow that needs env vars"      
