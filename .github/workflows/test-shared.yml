@@ -18,4 +18,4 @@ jobs:
     with:
       rack_env: $RACK_ENV
       env_file: $ENV_FILE
-      secrets: inherit
+      #secrets: inherit
