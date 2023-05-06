@@ -16,6 +16,6 @@ jobs:
   build_and_cache:
     uses: ./.github/workflows/shared.yml
     with:
-      rack_env: $RACK_ENV
-      env_file: $ENV_FILE
+      rack_env: ${{ env.RACK_ENV }}
+      env_file: ${{ env.ENV_FILE }}
       #secrets: inherit
