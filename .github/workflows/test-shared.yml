@@ -1,4 +1,4 @@
-name: Test Cached
+name: Test Shared
 on:
   workflow_dispatch:
   
@@ -22,7 +22,7 @@ jobs:
   invoke-workflow:
     needs: vars
     name: "Workflow that needs env vars"      
-    uses: ./.github/workflows/cached.yml
+    uses: ./.github/workflows/shared.yml
     with:
       rack_env: ${{ needs.vars.outputs.rack_env }}
       env_file: ${{ needs.vars.outputs.env_file }}
