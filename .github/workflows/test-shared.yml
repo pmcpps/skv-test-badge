@@ -1,21 +1,27 @@
 name: Test Shared
 on:
   workflow_dispatch:
+  
 env:
   RACK_ENV: stage
   ENV_FILE: .env.stage
-
+  
 jobs:
-  print_shared_info:
+  vars:
     runs-on: ubuntu-latest
+    outputs:
+      rack_env: ${{ env.RACK_ENV }}
+      env_file: ${{ env.ENV_FILE }}
     steps:
-      - name: Print Basic Info 1111
-        run: |
-          echo "ENV_FILE: $ENV_FILE"
-          echo "RACK_ENV: $RACK_ENV"
-  build_and_cache:
+      run: | 
+        echo "Exposing env vars"
+        echo "RACK_ENV: ${{ env.ENV_FILE }}"
+        echo "ENV_FILE: ${{ env.ENV_FILE }}"
+
+  invoke-workflow:
+    needs: vars
+    name: "Workflow that needs env vars"      
     uses: ./.github/workflows/shared.yml
     with:
-      rack_env: $RACK_ENV
-      env_file: $ENV_FILE
-      #secrets: inherit
+      rack_env: ${{ needs.vars.outputs.rack_env }}
+      env_file: ${{ needs.vars.outputs.env_file }}
