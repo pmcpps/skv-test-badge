@@ -1,4 +1,4 @@
-name: Build/Deploy Branch to Staging
+name: Test Shared
 on:
   workflow_dispatch:
 env:
@@ -7,7 +7,7 @@ env:
 
 jobs:
   call_build_and_cache:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/shared.yml
     with:
       rack_env: $RACK_ENV
       env_file: $ENV_FILE
