@@ -6,16 +6,17 @@ env:
   ENV_FILE: .env.stage
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Print Basic Info
-      run: |
-        echo "ENV_FILE: ${{ inputs.env_file }}"
-        echo "RACK_ENV: ${{ inputs.rack_env }}"
+  build_and_cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Basic Info
+        run: |
+          echo "ENV_FILE: ${{ inputs.env_file }}"
+          echo "RACK_ENV: ${{ inputs.rack_env }}"
   
-    - name: Call Shared
-      uses: ./.github/workflows/shared.yml
-      with:
-        rack_env: $RACK_ENV
-        env_file: $ENV_FILE
-        secrets: inherit
+      - name: Call Shared
+        uses: ./.github/workflows/shared.yml
+        with:
+          rack_env: $RACK_ENV
+          env_file: $ENV_FILE
+          secrets: inherit
