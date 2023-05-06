@@ -9,12 +9,12 @@ jobs:
   build_and_cache:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Basic Info
+      - name: Print Basic Info 1111
         run: |
-          echo "ENV_FILE: ${{ inputs.env_file }}"
-          echo "RACK_ENV: ${{ inputs.rack_env }}"
+          echo "ENV_FILE: $ENV_FILE"
+          echo "RACK_ENV: $RACK_ENV"
   
-      - name: Call Shared
+      - name: Call Shared 2222
         uses: ./.github/workflows/shared.yml
         with:
           rack_env: $RACK_ENV
