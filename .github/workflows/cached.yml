@@ -1,0 +1,19 @@
+name: Cached
+on:
+  workflow_call:
+    inputs:
+      rack_env:
+        required: true  
+        type: string
+      env_file:
+        required: true
+        type: string
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print basic info in shared.yml
+        run: |
+          echo "ENV_FILE: ${{ inputs.env_file }}"
+          echo "RACK_ENV: ${{ inputs.rack_env }}"
