@@ -13,6 +13,8 @@ jobs:
       rack_env: ${{ env.RACK_ENV }}
       env_file: ${{ env.ENV_FILE }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: test name
         run: | 
           echo "Exposing env vars"
