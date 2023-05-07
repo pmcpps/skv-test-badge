@@ -17,8 +17,8 @@ jobs:
         run: |
           echo "ENV_FILE: ${{ inputs.env_file }}"
           echo "RACK_ENV: ${{ inputs.rack_env }}"
-      - name: Checkout
-        uses: actions/checkout@v3
+      #- name: Checkout
+      #  uses: actions/checkout@v3
       - name: Get cached build
         uses: actions/cache@v3
         with:
