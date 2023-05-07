@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: build
-          key: some-key
+          key: assets-buildx-${{ github.sha }}
           restore-keys: |
             assets-build-${{ github.sha }}
           #key: ${{ runner.os }}-buildx-${{ github.sha }}
