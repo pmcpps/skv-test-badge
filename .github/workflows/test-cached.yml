@@ -34,7 +34,7 @@ jobs:
           path: build
           key: some-key
           restore-keys: |
-            some-key-buildx-${{ github.sha }}
+            assets-buildx]-${{ github.sha }}
           #key: ${{ runner.os }}-buildx-${{ github.sha }}
           #restore-keys: |
           #  ${{ runner.os }}-buildx-${{ github.sha }}
