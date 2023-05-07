@@ -25,7 +25,7 @@ jobs:
           echo "PRINTING GITHUB VARS!"
           echo "REPOSITORY: ${{ github.repository }}"
           echo "BRANCH: ${{ github.ref_name }}"
-          echo "SHA: {{ github.sha }}"
+          echo "SHA: ${{ github.sha }}"
           echo "SHORT SHA: $(git rev-parse --short ${{ github.sha }})
       - uses: actions/cache@v3
         with:
