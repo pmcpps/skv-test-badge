@@ -23,6 +23,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: <path to the files you need>  # See the note below
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-${{ github.sha }}
+          key: some-key
+          #key: ${{ runner.os }}-buildx-${{ github.sha }}
+          #restore-keys: |
+          #  ${{ runner.os }}-buildx-${{ github.sha }}
