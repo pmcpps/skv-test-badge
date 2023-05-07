@@ -22,7 +22,7 @@ jobs:
       - name: Get cached build
         uses: actions/cache@v3
         with:
-          path: <path to the files you need>  # See the note below
+          path: /build
           key: some-key
           restore-keys: |
             some-key
