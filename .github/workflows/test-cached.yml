@@ -16,10 +16,11 @@ jobs:
       - name: test name
         run: | 
           echo "Exposing env vars"
-          echo "RACK_ENV: ${{ env.ENV_FILE }}"
+          echo "RACK_ENV: ${{ env.RACK_ENV }}"
           echo "ENV_FILE: ${{ env.ENV_FILE }}"
           mkdir build
           echo "Hello world!" > "build/hello.txt"
+          echo "PRINTING THE FILE!"
           cat build/hello.txt
       - uses: actions/cache@v3
         with:
