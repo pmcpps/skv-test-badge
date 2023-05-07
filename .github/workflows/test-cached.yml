@@ -32,7 +32,9 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: build
-          key: some-key
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ github.sha }}
 
   invoke-workflow:
     needs: vars
