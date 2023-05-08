@@ -37,14 +37,16 @@ jobs:
           echo "TEST_SECRET2: ${{ secrets.TEST_SECRET }}"
       - name: Test
         run: |
-          #if  "${{ env.test_secret == 'hello_world' }}"
-          #then
-          #  echo "GOT SECRET!!"
-          #fi
+          # WORKS
           if  ${{ env.test_secret == 'hello_world' }}
           then
-            echo "GOT SECRET!!"
+            echo "GOT SECRET1!!"
           fi
+          # WORKS
+          #if  ${{ env.test_secret == 'hello_world' }}
+          #then
+          #  echo "GOT SECRET2!!"
+          #fi
       - uses: actions/cache@v3
         with:
           path: build
