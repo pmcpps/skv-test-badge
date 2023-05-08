@@ -8,7 +8,11 @@ on:
       env_file:
         required: true
         type: string
-      
+    secrets:
+      my_token:
+        description: 'The site token.'
+        required: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
