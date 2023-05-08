@@ -5,7 +5,8 @@ on:
 env:
   RACK_ENV: stage
   ENV_FILE: .env.stage
-  npm_secret: ${{ secrets.NPM_TOKEN }}
+  npm_token: ${{ secrets.NPM_TOKEN }}
+  test_secret: ${{ secrets.TEST_SECRET }}
   
 jobs:
   vars:
@@ -30,8 +31,16 @@ jobs:
           echo "BRANCH: ${{ github.ref_name }}"
           echo "SHA: ${{ github.sha }}"
           echo "SHORT SHA: $(git rev-parse --short ${{ github.sha }})"
-          echo "NPM_SECRET: ${{ env.npm_token }}"
-          echo "NPM_TOKEN: ${{ secrets.NPM_TOKEN }}"
+          echo "NPM_TOKEN1: ${{ env.npm_token }}"
+          echo "NPM_TOKEN2: ${{ secrets.NPM_TOKEN }}"
+          echo "TEST_SECRET1: ${{ env.test_secret }}"
+          echo "TEST_SECRET2: ${{ secrets.TEST_SECRET }}"
+      - name: Test
+        run: |
+          if [ "${{ env.test_secret }} -eq "hello_world" ]
+          then
+            echo "GOT SECRET!!
+          fi
       - uses: actions/cache@v3
         with:
           path: build
