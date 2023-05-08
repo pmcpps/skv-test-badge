@@ -28,10 +28,10 @@ jobs:
       #  if: ${{ secrets.my_token !== "stage" }}
       #  run: |
       #    echo "got here!! - stage"
-      #- name: check input
-      #  if: ${{ inputs.rack_env == "stage" }}
-      #  run: |
-      #    echo "got here!! - stage"
+      - name: check input
+        if: ${{ inputs.rack_env == "stage" }}
+        run: |
+          echo "got here!! - stage"
       - name: test the environment
         if: true
         run: |
