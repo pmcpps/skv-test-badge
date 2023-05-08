@@ -22,9 +22,9 @@ jobs:
           echo "ENV_FILE: ${{ inputs.env_file }}"
           echo "RACK_ENV: ${{ inputs.rack_env }}"
       - name: check token
-        if: ${{ secrets.my_token == "what" }}
+        if: ${{ inputs.rack_env == "stage" }}
         run: |
-          echo "got here!!"
+          echo "got here!! - stage"
       - name: test the environment
         if: true
         run: |
