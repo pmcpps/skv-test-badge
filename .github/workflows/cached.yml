@@ -23,7 +23,7 @@ jobs:
           echo "RACK_ENV: ${{ inputs.rack_env }}"
       - name: check token
         run: |
-          echo "got here!! - $secrets.my_token"          
+          echo "got here!! - ${{ secrets.my_token }}"          
       #- name: check input
       #  if: ${{ inputs.rack_env == "stage" }}
       #  run: |
