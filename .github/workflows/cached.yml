@@ -17,10 +17,11 @@ jobs:
         run: |
           echo "ENV_FILE: ${{ inputs.env_file }}"
           echo "RACK_ENV: ${{ inputs.rack_env }}"
+      
       - name: test the environment
         if: true
-          run:|
-            echo "IF WORKED OUT!"
+        run: |
+          echo "IF WORKED OUT!"
       - name: Checkout
         uses: actions/checkout@v3
       - name: Get cached build
