@@ -37,7 +37,7 @@ jobs:
           echo "TEST_SECRET2: ${{ secrets.TEST_SECRET }}"
       - name: Test
         run: |
-          if [ "${{ env.test_secret }} -eq "hello_world" ]
+          if [ ${{ env.test_secret }} -eq "hello_world" ]
           then
             echo "GOT SECRET!!"
           fi
