@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "got here!! - ${{ secrets.my_token }}"   
       - name: check token 2
-        if: ${{ secrets.rack_env !== "stage" }}
+        if: ${{ secrets.my_token !== "stage" }}
         run: |
           echo "got here!! - stage"
       #- name: check input
