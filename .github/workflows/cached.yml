@@ -24,10 +24,10 @@ jobs:
       - name: check token
         run: |
           echo "got here!! - ${{ secrets.my_token }}"   
-      - name: check token 2
-        if: ${{ secrets.my_token !== "stage" }}
-        run: |
-          echo "got here!! - stage"
+      #- name: check token 2
+      #  if: ${{ secrets.my_token !== "stage" }}
+      #  run: |
+      #    echo "got here!! - stage"
       #- name: check input
       #  if: ${{ inputs.rack_env == "stage" }}
       #  run: |
