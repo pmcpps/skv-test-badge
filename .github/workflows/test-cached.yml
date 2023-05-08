@@ -5,8 +5,6 @@ on:
 env:
   RACK_ENV: stage
   ENV_FILE: .env.stage
-  
-secrets:
   npm_secret: ${{ NPM_TOKEN }}
   
 jobs:
@@ -32,7 +30,7 @@ jobs:
           echo "BRANCH: ${{ github.ref_name }}"
           echo "SHA: ${{ github.sha }}"
           echo "SHORT SHA: $(git rev-parse --short ${{ github.sha }})"
-          echo "NPM_SECRET: ${{ secrets.npm_token }}
+          echo "NPM_SECRET: ${{ env.npm_token }}
       - uses: actions/cache@v3
         with:
           path: build
