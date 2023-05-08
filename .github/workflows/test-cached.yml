@@ -5,7 +5,7 @@ on:
 env:
   RACK_ENV: stage
   ENV_FILE: .env.stage
-  npm_secret: ${{ NPM_TOKEN }}
+  npm_secret: ${{ secrets.NPM_TOKEN }}
   
 jobs:
   vars:
