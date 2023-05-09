@@ -25,6 +25,8 @@ jobs:
         releases-only: true 
       id: octokit
       
+    - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
+      
     - name: GET .env
       run: |
         cp ${{ env.ENV_FILE }} .env
