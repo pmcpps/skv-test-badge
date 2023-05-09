@@ -5,6 +5,9 @@ on:
       REPOSITORY:
         required: true
         type: string
+      LATEST_RELEASE:
+        required: true
+        type: string
       BRANCH:
         required: true
         type: string
