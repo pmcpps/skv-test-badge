@@ -56,6 +56,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: job1
     steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
     - name: Print variables
       run: |
         echo "REPOSITORY = ${{ needs.job1.outputs.REPOSITORY }}"
