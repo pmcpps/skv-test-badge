@@ -17,6 +17,13 @@ jobs:
     steps:
     - name: Git checkout
       uses: actions/checkout@v3
+
+    - name: Get latest release tag
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: ${{ github.repository }}
+        releases-only: true 
+      id: octokit
       
     - name: GET .env
       run: |
@@ -30,6 +37,7 @@ jobs:
       shell: bash
       run: |
         echo "REPOSITORY=${{ github.repository }}" >> $GITHUB_ENV
+        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> GITHUB_ENV
         echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_OUTPUT
         echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
         echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
@@ -49,6 +57,7 @@ jobs:
     - name: Print variables
       run: |
         echo "REPOSITORY = ${{ env.REPOSITORY }}"
+        ecno "RELEASE = ${{ env.LATEST_RELEASE }}"
         echo "BRANCH = ${{ steps.extract_variables.outputs.BRANCH }}"
         echo "TAG = ${{ env.TAG }}"
         echo "GIT_SHA = ${{ env.GIT_SHA }}"
