@@ -62,7 +62,7 @@ jobs:
         echo "REPOSITORY = ${{ needs.job1.outputs.REPOSITORY }}"
         echo "LATEST_RELEASE = ${{ needs.job1.outputs.LATEST_RELEASE }}"
         echo "BRANCH = ${{ needs.job1.outputs.BRANCH }}"
-        echo "TAG = ${{ needs.job1.outputs..TAG }}"
+        echo "TAG = ${{ needs.job1.outputs.TAG }}"
         echo "GIT_SHA = ${{ needs.job1.outputs.GIT_SHA }}"
         echo "GIT_SHA_SHORT = ${{ needs.job1.outputs.GIT_SHA_SHORT }}"
         echo "MESSAGE = ${{ needs.job1.outputs.MESSAGE }}"
