@@ -46,5 +46,5 @@ jobs:
         # echo ${{ steps.extract_variables.outputs.BRANCH }}
         # echo ${{ steps.extract_variables.outputs.TAG }}
         # echo ${{ steps.extract_variables.outputs.GIT_SHA }}
-        # echo ${{ steps.extract_variables.outputs.GIT_SH_SHORT }}
+        # echo ${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}
         # echo ${{ steps.extract_variables.outputs.MESSAGE }}
