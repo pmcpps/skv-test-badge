@@ -26,7 +26,7 @@ jobs:
         echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
         echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
         echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_ENV
-        echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
+        echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
       id: extract_variables   
         # echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
         # echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
