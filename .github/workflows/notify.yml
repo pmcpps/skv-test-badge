@@ -1,0 +1,110 @@
+name: Notify
+on:
+  workflow_call:
+    inputs:
+      REPOSITORY:
+        required: true
+        type: string
+      LATEST_RELEASE:
+        required: true
+        type: string
+      BRANCH:
+        required: true
+        type: string
+      TAG:
+        required: true
+        type: string
+      GIT_SHA:
+        required: true
+        type: string
+      GIT_SHA_SHORT:
+        required: true
+        type: string
+      MESSAGE:
+        required: true
+        type: string
+      SITE_NAME:
+        required: true
+        type: string
+      SITE_URL:
+        required: true
+        type: string
+      RACK_ENV:
+        required: true
+        type: string
+      ENV_FILE:
+        required: true
+        type: string
+    secrets:
+      S3_BUCKET:
+        required: true
+      S3_REGION:
+        required: true
+      CLOUDFRONT_DISTRIBUTION_ID:
+        required: true  
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      SLACK_WEBHOOK_URL:
+        required: true
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print variables
+      run: |
+        echo "REPOSITORY = ${{ inputs.REPOSITORY }}"
+        echo "LATEST_RELEASE = ${{ inputs.LATEST_RELEASE }}"
+        echo "BRANCH = ${{ inputs.BRANCH }}"
+        echo "TAG = ${{ inputs.TAG }}"
+        echo "GIT_SHA = ${{ inputs.GIT_SHA }}"
+        echo "GIT_SHA_SHORT = ${{ inputs.GIT_SHA_SHORT }}"
+        echo "MESSAGE = ${{ inputs.MESSAGE }}"
+        echo "SITE_NAME = ${{ inputs.SITE_NAME }}"
+        echo "SITE_URL = ${{ inputs.SITE_URL }}"
+        echo "RACK_ENV = ${{ inputs.RACK_ENV }}"
+        echo "ENV_FILE = ${{ inputs.ENV_FILE }}"
+        echo "S3_BUCKET = ${{ secrets.S3_BUCKET }}"
+        echo "S3_REGION = ${{ secrets.S3_REGION }}"
+        echo "CLOUDFRONT_DISTRIBUTION_ID = ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+        echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
+        echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        echo "SLACK_WEBHOOK_URL = ${{ secrets.SLACK_WEBHOOK_URL }}"
+
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v2
+  #     - name: Cache Docker layers
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: /tmp/.buildx-cache
+  #         key: ${{ runner.os }}-buildx-${{ github.sha }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-buildx-
+  #     - name: Login to DockerHub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
+  #     - name: Login to GitHub Container Registry
+  #       uses: docker/login-action@v2
+  #       with:
+  #         registry: ghcr.io
+  #         username: ${{ github.repository_owner }}
+  #         password: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Build and Push
+  #       uses: docker/build-push-action@v4
+  #       with:
+  #         context: .
+  #         file: ./Dockerfile
+  #         push: true
+  #         tags: |
+  #           ${{ inputs.image_name }}:${{ inputs.image_tag }}
+  #           ghcr.io/${{ inputs.image_name }}:${{ inputs.image_tag }}
+  #         cache-from: type=local,src=/tmp/.buildx-cache
+  #         cache-to: type=local,dest=/tmp/.buildx-cache
