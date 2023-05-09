@@ -5,27 +5,27 @@ on:
       REPOSITORY:
         required: true
         type: string
-      BRANCH:
-        required: true
-        type: string
-      TAG:
-        required: true
-        type: string
-      GIT_SHA:
-        required: true
-        type: string
-      GIT_SHA_SHORT:
-        required: true
-        type: string
-      MESSAGE:
-        required: true
-        type: string
-      SITE_NAME:
-        required: true
-        type: string
-      SITE_URL:
-        required: true
-        type: string
+      #BRANCH:
+      #  required: true
+      #  type: string
+      #TAG:
+      #  required: true
+      #  type: string
+      #GIT_SHA:
+      #  required: true
+      #  type: string
+      #GIT_SHA_SHORT:
+      #  required: true
+      #  type: string
+      #MESSAGE:
+      #  required: true
+      #  type: string
+      #SITE_NAME:
+      #  required: true
+      #  type: string
+      #SITE_URL:
+      #  required: true
+      #  type: string
     secrets:
       S3_BUCKET:
         required: true
@@ -44,18 +44,18 @@ jobs:
     - name: Print variables
       run: |
         echo "REPOSITORY = ${{ inputs.REPOSITORY }}"
-        echo "LATEST_RELEASE = ${{ inputs.LATEST_RELEASE }}"
-        echo "BRANCH = ${{ inputs.BRANCH }}"
-        echo "TAG = ${{ inputs.TAG }}"
-        echo "GIT_SHA = ${{ inputs.GIT_SHA }}"
-        echo "GIT_SHA_SHORT = ${{ inputs.GIT_SHA_SHORT }}"
-        echo "MESSAGE = ${{ inputs.MESSAGE }}"
-        echo "SITE_NAME = ${{ inputs.SITE_NAME }}"
-        echo "S3_BUCKET = ${{ inputs.S3_BUCKET }}"
-        echo "S3_REGION = ${{ inputs.S3_REGION }}"
-        echo "CLOUDFRONT_DISTRIBUTION_ID = ${{ inputs.CLOUDFRONT_DISTRIBUTION_ID }}"
-        echo "AWS_ACCESS_KEY_ID = ${{ inputs.AWS_ACCESS_KEY_ID }}"
-        echo "AWS_SECRET_ACCESS_KEY = ${{ inputs.AWS_SECRET_ACCESS_KEY }}"
+        #echo "LATEST_RELEASE = ${{ inputs.LATEST_RELEASE }}"
+        #echo "BRANCH = ${{ inputs.BRANCH }}"
+        #echo "TAG = ${{ inputs.TAG }}"
+        #echo "GIT_SHA = ${{ inputs.GIT_SHA }}"
+        #echo "GIT_SHA_SHORT = ${{ inputs.GIT_SHA_SHORT }}"
+        #echo "MESSAGE = ${{ inputs.MESSAGE }}"
+        #echo "SITE_NAME = ${{ inputs.SITE_NAME }}"
+        #echo "S3_BUCKET = ${{ secrets.S3_BUCKET }}"
+        #echo "S3_REGION = ${{ secrets.S3_REGION }}"
+        #echo "CLOUDFRONT_DISTRIBUTION_ID = ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
+        #echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
+        #echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
   # build:
   #   runs-on: ubuntu-latest
