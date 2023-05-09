@@ -41,7 +41,7 @@ jobs:
         echo "BRANCH = ${{ steps.extract_variables.outputs.BRANCH }}"
         echo "TAG = ${{ env.TAG }}"
         echo "GIT_SHA = ${{ env.GIT_SHA }}"
-        echo "GIT_SHA_SHORT = ${{ env.GIT_SH_SHORT }}"
+        echo "GIT_SHA_SHORT = ${{ env.GIT_SHA_SHORT }}"
         echo "MESSAGE = ${{ env.MESSAGE }}"
         # echo ${{ steps.extract_variables.outputs.BRANCH }}
         # echo ${{ steps.extract_variables.outputs.TAG }}
