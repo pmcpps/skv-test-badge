@@ -15,15 +15,15 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      REPOSITORY: ${{ steps.extract_variables.REPOSITORY }}
+      REPOSITORY: ${{ steps.extract_variables.outputs.REPOSITORY }}
       LATEST_RELEASE: ${{ steps.octokit.outputs.tag }}
-      BRANCH: ${{ steps.extract_variables.BRANCH }}
-      TAG: ${{ steps.extract_variables.TAG }}
-      GIT_SHA: ${{ steps.extract_variables.GIT_SHA }}
-      GIT_SHA_SHORT: ${{ steps.extract_variables.GIT_SHA_SHORT }}
-      MESSAGE: ${{ steps.extract_variables.MESSAGE }}
-      SITE_URL: ${{ steps.dotenv.outputs.SITE_URL }}
-      SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}      
+      BRANCH: ${{ steps.extract_variables.outputs.BRANCH }}
+      TAG: ${{ steps.extract_variables.outputs.TAG }}
+      GIT_SHA: ${{ steps.extract_variables.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ steps.extract_variables.outputs.MESSAGE }}
+      SITE_URL: ${{ steps.dotenv.outputs.outputs.SITE_URL }}
+      SITE_NAME: ${{ steps.dotenv.outputs.outputs.SITE_NAME }}      
     steps:
     - name: Git checkout
       uses: actions/checkout@v3
