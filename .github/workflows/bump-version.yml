@@ -8,32 +8,14 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  RACK_ENV: stage
+  ENV_FILE: .env.stage
 
 jobs:
   bump:
     runs-on: ubuntu-latest
     steps:
-    
-    # GET BRANCH NAME:
-    - name: Set package.json version
-      run: |
-        echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
-
-    # https://github.com/marketplace/actions/find-latest-tag
-    - uses: oprypin/find-latest-tag@v1
-      with:
-        repository: pmcpps/skv-test-badge  # The repository to scan.
-        releases-only: true  # We know that all relevant tags have a GitHub release for them.
-      id: octokit  # The step ID to refer to later.
-
-    - run: |
-        echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
-        
-    - run: |
-        echo "### LATEST RELEASE TAG:  ${{ steps.octokit.outputs.tag }}."
-
-    - run: echo "Octokit is at version ${{ steps.octokit.outputs.tag }}"
-    
+    # CHECK OUT REPO
     - name: Git checkout
       uses: actions/checkout@v3
       with:
@@ -42,89 +24,29 @@ jobs:
     - name: Extract variables
       shell: bash
       run: |
-        echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
-        echo "TAG=$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
-        echo "GIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-        echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+        echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+        echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
+        echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_ENV
         echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
-      id: extract_variables     
+      id: extract_variables   
+        # echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+        # echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+        # echo "TAG=$(git tag --points-at HEAD)" >> $GITHUB_OUTPUT
+        # echo "GIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+        # echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        # echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
+      # id: extract_variables     
       
     - name: Print variables
       run: |
-        echo ${{ steps.extract_variables.outputs.BRANCH }}
-        echo ${{ steps.extract_variables.outputs.TAG }}
-        echo ${{ steps.extract_variables.outputs.GIT_SHA }}
-        echo ${{ steps.extract_variables.outputs.GIT_SH_SHORT }}
-        echo ${{ steps.extract_variables.outputs.MESSAGE }}
-
-    - name: Git commands
-      run: |
-        # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-        git --version
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-        git status
-        git tag
-        git describe
-        echo "-------------------------"
-        git rev-list --tags --max-count=1
-        git rev-list --tags --max-count=1 | git describe --tags
-        git tag --sort=committerdate | grep -E '^[0-9]' | tail -1
-        
-    # https://stackoverflow.com/questions/58177786/get-the-current-pushed-tag-in-github-actions
-    - name: Set env
-      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-    - name: Test
-      run: |
-        echo $RELEASE_VERSION
-        echo ${{ env.RELEASE_VERSION }}
-    
-    - name: "Setup Node"
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
-        
-    - name: "Retrieve version"
-      id: version
-      run: |
-        echo "TAG_NAME=$(git tag | sort -V | tail -1)" >> $GITHUB_OUTPUT
-        
-    - name: Print Release
-      id: print_release
-      run: |
-        echo "RELEASE TAG IS: ${{ steps.version.outputs.TAG_NAME }}"
-
-    - name: "call action"
-      id: last_release
-      uses: InsonusK/get-latest-release@v1.0.1
-      with:
-        myToken: ${{ github.token }}
-        exclude_types: ""
-        view_top: 1
-    - name: "Print result"
-      run: |
-        echo "id: ${{ steps.last_release.outputs.id }}"
-        echo "name: ${{ steps.last_release.outputs.name }}"
-        echo "tag_name: ${{ steps.last_release.outputs.tag_name }}"
-        echo "created_at: ${{ steps.last_release.outputs.created_at }}"
-        echo "draft: ${{ steps.last_release.outputs.draft }}"
-        echo "prerelease: ${{ steps.last_release.outputs.prerelease }}"         
-        echo "release: ${{ steps.last_release.outputs.release }}"   
-        echo "---------------------------------------"
-        echo "GIT_TAG=`echo $(git describe --tags --abbrev=0)`" >> $GITHUB_ENV
-        echo "---------------------------------------"
-        echo "LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_OUTPUT
-
-    - name: Set package.json version
-      run: |
-        echo "### Package version bumped to:  ${{ github.ref_name }}."
-
-    - name: Success Summary
-      if: ${{ success() }}
-      run: |
-        echo "### Package version bumped to:  ${{ github.ref_name }}.  Release tag created."
-
-    - name: Failure Summary
-      if: ${{ failure() }}
-      run: |
-        echo "### Unable to bump version/release tag to:  $${{ github.event.release.tag_name }}."
+        echo "${{ steps.extract_variables.env.BRANCH }}"
+        echo "${{ steps.extract_variables.env.TAG }}"
+        echo "${{ steps.extract_variables.env.GIT_SHA }}"
+        echo "${{ steps.extract_variables.env.GIT_SH_SHORT }}"
+        echo "${{ steps.extract_variables.env.MESSAGE }}"
+        # echo ${{ steps.extract_variables.outputs.BRANCH }}
+        # echo ${{ steps.extract_variables.outputs.TAG }}
+        # echo ${{ steps.extract_variables.outputs.GIT_SHA }}
+        # echo ${{ steps.extract_variables.outputs.GIT_SH_SHORT }}
+        # echo ${{ steps.extract_variables.outputs.MESSAGE }}
