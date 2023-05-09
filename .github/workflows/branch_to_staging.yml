@@ -102,7 +102,7 @@ jobs:
 
   notify:
     needs: [job1, build, deploy]
-    uses: ./.github/workflows/NOTIFY.yml
+    uses: ./.github/workflows/notify.yml
     with:
       REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
       LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
