@@ -35,6 +35,8 @@ jobs:
         echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
         echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_ENV
         echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
+        echo "SITE_NAME=${{ steps.dotenv.outputs.SITE_NAME }}" >> $GITHUB_ENV
+        echo "SITE_URL=${{ steps.dotenv.outputs.SITE_URL }}" >> $GITHUB_ENV
       id: extract_variables   
         # echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
         # echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
@@ -52,6 +54,9 @@ jobs:
         echo "GIT_SHA = ${{ env.GIT_SHA }}"
         echo "GIT_SHA_SHORT = ${{ env.GIT_SHA_SHORT }}"
         echo "MESSAGE = ${{ env.MESSAGE }}"
+        echo "SITE_NAME = ${{ env.SITE_NAME }}"
+        echo "SITE_URL = ${{ env.SITE_URL }}"
+
         # echo ${{ steps.extract_variables.outputs.BRANCH }}
         # echo ${{ steps.extract_variables.outputs.TAG }}
         # echo ${{ steps.extract_variables.outputs.GIT_SHA }}
