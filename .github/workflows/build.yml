@@ -5,27 +5,27 @@ on:
       REPOSITORY:
         required: true
         type: string
-      #BRANCH:
-      #  required: true
-      #  type: string
-      #TAG:
-      #  required: true
-      #  type: string
-      #GIT_SHA:
-      #  required: true
-      #  type: string
-      #GIT_SHA_SHORT:
-      #  required: true
-      #  type: string
-      #MESSAGE:
-      #  required: true
-      #  type: string
-      #SITE_NAME:
-      #  required: true
-      #  type: string
-      #SITE_URL:
-      #  required: true
-      #  type: string
+      BRANCH:
+        required: true
+        type: string
+      TAG:
+        required: true
+        type: string
+      GIT_SHA:
+        required: true
+        type: string
+      GIT_SHA_SHORT:
+        required: true
+        type: string
+      MESSAGE:
+        required: true
+        type: string
+      SITE_NAME:
+        required: true
+        type: string
+      SITE_URL:
+        required: true
+        type: string
     secrets:
       S3_BUCKET:
         required: true
