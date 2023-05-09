@@ -19,7 +19,7 @@ jobs:
       GIT_SHA_SHORT: ${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}
       MESSAGE: ${{ steps.extract_variables.outputs.MESSAGE }}
       SITE_URL: ${{ steps.dotenv.outputs.SITE_URL }}
-      SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}     
+      SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}
     steps:
     - name: Git checkout
       uses: actions/checkout@v3
@@ -68,6 +68,7 @@ jobs:
       CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.STAGE_CLOUDFRONT_DISTRIBUTION_ID }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   #lint:
   #  uses: ./.github/workflows/rubocop.yml
