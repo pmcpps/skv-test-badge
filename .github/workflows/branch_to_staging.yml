@@ -55,8 +55,54 @@ jobs:
       id: extract_variables     
 
   build:
-    needs: job1
+    needs: [job1]
     uses: ./.github/workflows/build.yml
+    with:
+      REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.job1.outputs.BRANCH }}
+      TAG: ${{ needs.job1.outputs.TAG }}
+      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}
+      RACK_ENV: ${{ needs.job1.outputs.RACK_ENV }}
+      ENV_FILE: ${{ needs.job1.outputs.ENV_FILE }}
+    secrets:
+      S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
+      S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.STAGE_CLOUDFRONT_DISTRIBUTION_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      
+  deploy:
+    needs: [job1, build]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.job1.outputs.BRANCH }}
+      TAG: ${{ needs.job1.outputs.TAG }}
+      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}
+      RACK_ENV: ${{ needs.job1.outputs.RACK_ENV }}
+      ENV_FILE: ${{ needs.job1.outputs.ENV_FILE }}
+    secrets:
+      S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
+      S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.STAGE_CLOUDFRONT_DISTRIBUTION_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  notify:
+    needs: [job1, build, deploy]
+    uses: ./.github/workflows/NOTIFY.yml
     with:
       REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
       LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
