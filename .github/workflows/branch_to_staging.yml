@@ -1,1 +1,86 @@
+name: Build/Deploy Branch to Staging
+on:
+  workflow_dispatch:
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  RACK_ENV: stage
+  ENV_FILE: .env.stage
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest 
+    outputs:
+      REPOSITORY: ${{ steps.extract_variables.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ steps.octokit.outputs.tag }}
+      BRANCH: ${{ steps.extract_variables.outputs.BRANCH }}
+      TAG: ${{ steps.extract_variables.outputs.TAG }}
+      GIT_SHA: ${{ steps.extract_variables.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ steps.extract_variables.outputs.MESSAGE }}
+      SITE_URL: ${{ steps.dotenv.outputs.SITE_URL }}
+      SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}     
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+    - name: Get latest release tag
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: ${{ github.repository }}
+        releases-only: true 
+      id: octokit      
+    - name: GET .env
+      run: |
+        cp ${{ env.ENV_FILE }} .env
+    - name: Dotenv action
+      uses: falti/dotenv-action@v1.0.4
+      id: dotenv   
+    - name: Extract variables
+      shell: bash
+      run: |
+        echo "REPOSITORY=${{ github.repository }}" >> $GITHUB_OUTPUT
+        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> $GITHUB_OUTPUT
+        echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+        echo "TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+        echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_OUTPUT
+        echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_OUTPUT
+        echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
+        echo "SITE_NAME=${{ steps.dotenv.outputs.SITE_NAME }}" >> $GITHUB_OUTPUT
+        echo "SITE_URL=${{ steps.dotenv.outputs.SITE_URL }}" >> $GITHUB_OUTPUT
+      id: extract_variables     
+
+  build:
+    needs: job1
+    uses: ./.github/workflows/build.yml
+    with:
+      REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.job1.outputs.BRANCH }}
+      TAG: ${{ needs.job1.outputs.TAG }}
+      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}"   
+    secrets: inherit
+
+  #lint:
+  #  uses: ./.github/workflows/rubocop.yml
+  #test:
+  #  uses: ./.github/workflows/parallel_ci.yml
+  #  secrets: inherit
+  #call_build_and_push:
+  #  needs: test
+  #  uses: ./.github/workflows/build.yml
+  #  with:
+  #    image_name: ${{ github.repository }}
+  #    image_tag: ${{ github.ref_name }}
+  #  secrets: inherit
+  #deploy:
+  #  needs: [test, call_build_and_push]
+  #  uses: ./.github/workflows/_update_terraform.yml
+  #  with:
+  #    image_tag: ${{ github.ref_name }}
+  #    deployment_environment: staging
+  #  secrets: inherit
 
