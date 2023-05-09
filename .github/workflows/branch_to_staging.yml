@@ -20,6 +20,9 @@ jobs:
       MESSAGE: ${{ steps.extract_variables.outputs.MESSAGE }}
       SITE_URL: ${{ steps.dotenv.outputs.SITE_URL }}
       SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}
+      RACK_ENV: ${{ env.RACK_ENV }}
+      ENV_FILE: ${{ env.ENV_FILE }}
+
     steps:
     - name: Git checkout
       uses: actions/checkout@v3
@@ -47,6 +50,8 @@ jobs:
         echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
         echo "SITE_NAME=${{ steps.dotenv.outputs.SITE_NAME }}" >> $GITHUB_OUTPUT
         echo "SITE_URL=${{ steps.dotenv.outputs.SITE_URL }}" >> $GITHUB_OUTPUT
+        echo "RACK_ENV=${{ env.RACK_ENV }}" >> $GITHUB_OUTPUT
+        echo "ENV_FILE=${{ env.ENV_FILE }}" >> $GITHUB_OUTPUT
       id: extract_variables     
 
   build:
@@ -62,8 +67,8 @@ jobs:
       MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
       SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
       SITE_URL: ${{ needs.job1.outputs.SITE_URL }}
-      RACK_ENV: $RACK_ENV
-      ENV_FILE: $ENV_FILE
+      RACK_ENV: ${{ needs.job1.outputs.RACK_ENV }}
+      ENV_FILE: ${{ needs.job1.outputs.ENV_FILE }}
     secrets:
       S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
       S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
