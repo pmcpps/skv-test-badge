@@ -40,11 +40,11 @@ jobs:
       
     - name: Print variables
       run: |
-        echo "${{ steps.extract_variables.env.BRANCH }}"
-        echo "${{ steps.extract_variables.env.TAG }}"
-        echo "${{ steps.extract_variables.env.GIT_SHA }}"
-        echo "${{ steps.extract_variables.env.GIT_SH_SHORT }}"
-        echo "${{ steps.extract_variables.env.MESSAGE }}"
+        echo "BRANCH = ${{ steps.extract_variables.env.BRANCH }}"
+        echo "TAG = ${{ steps.extract_variables.env.TAG }}"
+        echo "GIT_SHA = ${{ steps.extract_variables.env.GIT_SHA }}"
+        echo "GIT_SHA_SHORT = ${{ steps.extract_variables.env.GIT_SH_SHORT }}"
+        echo "MESSAGE = ${{ steps.extract_variables.env.MESSAGE }}"
         # echo ${{ steps.extract_variables.outputs.BRANCH }}
         # echo ${{ steps.extract_variables.outputs.TAG }}
         # echo ${{ steps.extract_variables.outputs.GIT_SHA }}
