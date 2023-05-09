@@ -54,7 +54,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
-      #LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
+      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
       BRANCH: ${{ needs.job1.outputs.BRANCH }}
       TAG: ${{ needs.job1.outputs.TAG }}
       GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
