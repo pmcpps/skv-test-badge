@@ -29,6 +29,12 @@ on:
       SITE_URL:
         required: true
         type: string
+      RACK_ENV:
+        required: true
+        type: string
+      ENV_FILE:
+        required: true
+        type: string
     secrets:
       S3_BUCKET:
         required: true
@@ -56,13 +62,15 @@ jobs:
         echo "GIT_SHA_SHORT = ${{ inputs.GIT_SHA_SHORT }}"
         echo "MESSAGE = ${{ inputs.MESSAGE }}"
         echo "SITE_NAME = ${{ inputs.SITE_NAME }}"
+        echo "SITE_URL = ${{ inputs.SITE_URL }}"
+        echo "RACK_ENV = ${{ inputs.RACK_ENV }}"
+        echo "ENV_FILE = ${{ inputs.ENV_FILE }}"
         echo "S3_BUCKET = ${{ secrets.S3_BUCKET }}"
         echo "S3_REGION = ${{ secrets.S3_REGION }}"
         echo "CLOUDFRONT_DISTRIBUTION_ID = ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
         echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
         echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         echo "SLACK_WEBHOOK_URL = ${{ secrets.SLACK_WEBHOOK_URL }}"
-
 
   # build:
   #   runs-on: ubuntu-latest
