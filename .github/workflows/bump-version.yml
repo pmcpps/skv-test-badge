@@ -57,7 +57,7 @@ jobs:
     - name: Print variables
       run: |
         echo "REPOSITORY = ${{ env.REPOSITORY }}"
-        ecno "RELEASE = ${{ env.LATEST_RELEASE }}"
+        echo "LATEST_RELEASE = ${{ env.LATEST_RELEASE }}"
         echo "BRANCH = ${{ steps.extract_variables.outputs.BRANCH }}"
         echo "TAG = ${{ env.TAG }}"
         echo "GIT_SHA = ${{ env.GIT_SHA }}"
