@@ -39,7 +39,7 @@ jobs:
       shell: bash
       run: |
         echo "REPOSITORY=${{ github.repository }}" >> $GITHUB_ENV
-        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> GITHUB_ENV
+        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> $GITHUB_ENV
         echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_OUTPUT
         echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
         echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
