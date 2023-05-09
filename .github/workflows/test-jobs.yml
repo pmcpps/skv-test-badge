@@ -1,0 +1,70 @@
+name: Test Jobs
+on:
+  workflow_dispatch:
+  
+  release:
+    types: [published]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  RACK_ENV: stage
+  ENV_FILE: .env.stage
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      REPOSITORY: ${{ steps.extract_variables.REPOSITORY }}
+      LATEST_RELEASE: ${{ steps.octokit.outputs.tag }}
+      BRANCH: ${{ steps.extract_variables.BRANCH }}
+      TAG: ${{ steps.extract_variables.TAG }}
+      GIT_SHA: ${{ steps.extract_variables.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ steps.extract_variables.GIT_SHA_SHORT }}
+      MESSAGE: ${{ steps.extract_variables.MESSAGE }}
+      SITE_URL: ${{ steps.dotenv.outputs.SITE_URL }}
+      SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}      
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v3
+    - name: Get latest release tag
+      uses: oprypin/find-latest-tag@v1
+      with:
+        repository: ${{ github.repository }}
+        releases-only: true 
+      id: octokit      
+    - name: GET .env
+      run: |
+        cp ${{ env.ENV_FILE }} .env
+    - name: Dotenv action
+      uses: falti/dotenv-action@v1.0.4
+      id: dotenv   
+    - name: Extract variables
+      shell: bash
+      run: |
+        echo "REPOSITORY=${{ github.repository }}" >> $GITHUB_ENV
+        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> $GITHUB_ENV
+        echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+        echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+        echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_ENV
+        echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_ENV
+        echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_ENV
+        echo "SITE_NAME=${{ steps.dotenv.outputs.SITE_NAME }}" >> $GITHUB_ENV
+        echo "SITE_URL=${{ steps.dotenv.outputs.SITE_URL }}" >> $GITHUB_ENV
+      id: extract_variables   
+   
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+    - name: Print variables
+      run: |
+        echo "REPOSITORY = ${{ needs.job1.outputs.REPOSITORY }}"
+        echo "LATEST_RELEASE = ${{ needs.job1.outputs.LATEST_RELEASE }}"
+        echo "BRANCH = ${{ needs.job1.outputs.BRANCH }}"
+        echo "TAG = ${{ needs.job1.outputs..TAG }}"
+        echo "GIT_SHA = ${{ needs.job1.outputs.GIT_SHA }}"
+        echo "GIT_SHA_SHORT = ${{ needs.job1.outputs.GIT_SHA_SHORT }}"
+        echo "MESSAGE = ${{ needs.job1.outputs.MESSAGE }}"
+        echo "SITE_NAME = ${{ needs.job1.outputs.SITE_NAME }}"
+        echo "SITE_URL = ${{ needs.job1.outputs.SITE_URL }}"
