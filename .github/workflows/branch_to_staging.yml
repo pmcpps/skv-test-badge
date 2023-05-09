@@ -62,7 +62,12 @@ jobs:
       #MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
       #SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
       #SITE_URL: ${{ needs.job1.outputs.SITE_URL }}"   
-    secrets: inherit
+    secrets:
+      S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
+      S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
+      CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.STAGE_CLOUDFRONT_DISTRIBUTION_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   #lint:
   #  uses: ./.github/workflows/rubocop.yml
