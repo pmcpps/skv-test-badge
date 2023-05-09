@@ -54,14 +54,14 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
-      #LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
-      #BRANCH: ${{ needs.job1.outputs.BRANCH }}
-      #TAG: ${{ needs.job1.outputs.TAG }}
-      #GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
-      #GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
-      #MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
-      #SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
-      #SITE_URL: ${{ needs.job1.outputs.SITE_URL }}"   
+      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.job1.outputs.BRANCH }}
+      TAG: ${{ needs.job1.outputs.TAG }}
+      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}"   
     secrets:
       S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
       S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
