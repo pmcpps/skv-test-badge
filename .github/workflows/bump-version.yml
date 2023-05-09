@@ -15,12 +15,16 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     steps:
-    # CHECK OUT REPO
     - name: Git checkout
       uses: actions/checkout@v3
-    - name: Get dotenv
+      
+    - name: GET .env
+      run: |
+        cp ${{ env.ENV_FILE }} .env      
+    - name: Dotenv action
       uses: falti/dotenv-action@v1.0.4
-      id: dotenv      
+      id: dotenv   
+      
     - name: Extract variables
       shell: bash
       run: |
