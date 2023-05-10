@@ -8,7 +8,7 @@ env:
   ENV_FILE: .env.stage
 
 jobs:
-  job1:
+  vars:
     runs-on: ubuntu-latest 
     outputs:
       REPOSITORY: ${{ steps.extract_variables.outputs.REPOSITORY }}
@@ -55,20 +55,20 @@ jobs:
       id: extract_variables     
 
   build:
-    needs: [job1]
+    needs: [vars]
     uses: ./.github/workflows/build.yml
     with:
-      REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
-      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
-      BRANCH: ${{ needs.job1.outputs.BRANCH }}
-      TAG: ${{ needs.job1.outputs.TAG }}
-      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
-      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
-      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
-      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
-      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}
-      RACK_ENV: ${{ needs.job1.outputs.RACK_ENV }}
-      ENV_FILE: ${{ needs.job1.outputs.ENV_FILE }}
+      REPOSITORY: ${{ needs.vars.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ needs.vars.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.vars.outputs.BRANCH }}
+      TAG: ${{ needs.vars.outputs.TAG }}
+      GIT_SHA: ${{ needs.vars.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.vars.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.vars.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.vars.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.vars.outputs.SITE_URL }}
+      RACK_ENV: ${{ needs.vars.outputs.RACK_ENV }}
+      ENV_FILE: ${{ needs.vars.outputs.ENV_FILE }}
     secrets:
       S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
       S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
@@ -78,20 +78,20 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       
   deploy:
-    needs: [job1, build]
+    needs: [vars, build]
     uses: ./.github/workflows/deploy.yml
     with:
-      REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
-      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
-      BRANCH: ${{ needs.job1.outputs.BRANCH }}
-      TAG: ${{ needs.job1.outputs.TAG }}
-      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
-      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
-      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
-      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
-      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}
-      RACK_ENV: ${{ needs.job1.outputs.RACK_ENV }}
-      ENV_FILE: ${{ needs.job1.outputs.ENV_FILE }}
+      REPOSITORY: ${{ needs.vars.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ needs.vars.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.vars.outputs.BRANCH }}
+      TAG: ${{ needs.vars.outputs.TAG }}
+      GIT_SHA: ${{ needs.vars.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.vars.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.vars.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.vars.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.vars.outputs.SITE_URL }}
+      RACK_ENV: ${{ needs.vars.outputs.RACK_ENV }}
+      ENV_FILE: ${{ needs.vars.outputs.ENV_FILE }}
     secrets:
       S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
       S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
@@ -101,20 +101,20 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   notify:
-    needs: [job1, build, deploy]
+    needs: [vars, build, deploy]
     uses: ./.github/workflows/notify.yml
     with:
-      REPOSITORY: ${{ needs.job1.outputs.REPOSITORY }}
-      LATEST_RELEASE: ${{ needs.job1.outputs.LATEST_RELEASE }}
-      BRANCH: ${{ needs.job1.outputs.BRANCH }}
-      TAG: ${{ needs.job1.outputs.TAG }}
-      GIT_SHA: ${{ needs.job1.outputs.GIT_SHA }}
-      GIT_SHA_SHORT: ${{ needs.job1.outputs.GIT_SHA_SHORT }}
-      MESSAGE: ${{ needs.job1.outputs.MESSAGE }}
-      SITE_NAME: ${{ needs.job1.outputs.SITE_NAME }}
-      SITE_URL: ${{ needs.job1.outputs.SITE_URL }}
-      RACK_ENV: ${{ needs.job1.outputs.RACK_ENV }}
-      ENV_FILE: ${{ needs.job1.outputs.ENV_FILE }}
+      REPOSITORY: ${{ needs.vars.outputs.REPOSITORY }}
+      LATEST_RELEASE: ${{ needs.vars.outputs.LATEST_RELEASE }}
+      BRANCH: ${{ needs.vars.outputs.BRANCH }}
+      TAG: ${{ needs.vars.outputs.TAG }}
+      GIT_SHA: ${{ needs.vars.outputs.GIT_SHA }}
+      GIT_SHA_SHORT: ${{ needs.vars.outputs.GIT_SHA_SHORT }}
+      MESSAGE: ${{ needs.vars.outputs.MESSAGE }}
+      SITE_NAME: ${{ needs.vars.outputs.SITE_NAME }}
+      SITE_URL: ${{ needs.vars.outputs.SITE_URL }}
+      RACK_ENV: ${{ needs.vars.outputs.RACK_ENV }}
+      ENV_FILE: ${{ needs.vars.outputs.ENV_FILE }}
     secrets:
       S3_BUCKET: ${{ secrets.STAGE_S3_BUCKET }}
       S3_REGION: ${{ secrets.STAGE_S3_BUCKET_REGION }}
