@@ -1,26 +1,14 @@
-name: Test Vars
+name: Simple
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: 
   workflow_dispatch:
-    inputs:
-      vercelBuildWithoutCache:
-        description: 'Vercel Build Without Cache'     
-        default: 'false'
-env:
-  VERCEL_ARGS: ""
+
 jobs:
   printInputs:
     runs-on: ubuntu-latest
     steps:
-      - name: set env vars
-        if: ${{ github.event.inputs.vercelBuildWithoutCache  == 'true' }}
-        run: |
-          echo "GOT HERE!"
-          echo -e "Vercel Build Without Cache: ${{ github.event.inputs.vercelBuildWithoutCache }}"
-          echo "VERCEL_ARGS=--force" >> $GITHUB_ENV
-          echo "TEST_ARGS=XXX" >> $GITHUB_ENV
       - name: print env vars
         run: 
-          echo -e "TEST_ARGS = ${{env.TEST_ARGS}}"
-          echo -e "VERCEL_ARGS = ${{env.VERCEL_ARGS}}"
+          echo -e "AWS_ACCESS_KEY_ID = ${{secrets.AWS_ACCESS_KEY_ID}}"
+          echo -e "AWS_SECRET_ACCESS_KEY = ${{secrets.AWS_SECRET_ACCESS_KEY}}"
           echo -e "DONE WITH JOB"
