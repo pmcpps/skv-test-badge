@@ -13,4 +13,6 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY = ${{secrets.AWS_SECRET_ACCESS_KEY}}"
           echo "S3_BUCKET = ${{secrets.S3_BUCKET}}"
           echo "S3_BUCKET_REGION = ${{secrets.S3_BUCKET_REGION}}"
+          mkdir build
+          echo "Hello world!" > "build/hello.txt"
           echo "DONE WITH JOB"
