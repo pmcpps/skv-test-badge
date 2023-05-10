@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
       
@@ -33,6 +33,5 @@ jobs:
           folder: build
           bucket: ${{ secrets.STAGE_S3_BUCKET }}
           bucket-region: ${{ secrets.S3_REGION }}
-          #dist-id: ${{ secrets.STAGE_CLOUDFRONT_DISTRIBUTION_ID }}
           invalidation: /
           delete-removed: false
