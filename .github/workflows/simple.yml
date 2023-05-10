@@ -27,11 +27,11 @@ jobs:
         with:
           node-version: '14'
       
-      #- name: Deploy
-      #  uses: reggionick/s3-deploy@v3
-      #  with:
-      #    folder: build
-      #    bucket: ${{ secrets.STAGE_S3_BUCKET }}
-      #    bucket-region: ${{ secrets.S3_REGION }}
-      #    invalidation: /
-      #    delete-removed: false
+      - name: Deploy
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: build
+          bucket: ${{ secrets.STAGE_S3_BUCKET }}
+          bucket-region: ${{ secrets.S3_BUCKET_REGION }}
+          invalidation: /
+          delete-removed: false
