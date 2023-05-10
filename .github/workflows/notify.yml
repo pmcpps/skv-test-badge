@@ -74,7 +74,7 @@ jobs:
         echo "GITHUB_RUN_NUMBER = ${{ env.GITHUB_RUN_NUMBER }}"
         echo "GITHUB_WORKFLOW = ${{ env.GITHUB_WORKFLOW }}"
         echo "github.actor = ${{ github.actor }}"
-        echo "github.repository = ${{ github.repository }}
+        echo "github.repository = ${{ github.repository }}"
         
         
     #- name: Notify Slack
