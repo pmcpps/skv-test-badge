@@ -16,4 +16,15 @@ jobs:
           echo "RUNNER_TEMP = $RUNNER_TEMP"
           mkdir $RUNNER_TEMP/build
           echo "Hello world!" > $RUNNER_TEMP/build/hello.txt
+          echo "Hello world! (2)" > ./build/hello2.txt
           echo "DONE WITH JOB"
+
+      - name: Deploy
+        uses: reggionick/s3-deploy@v3
+        with:
+          folder: build
+          bucket: ${{ secrets.STAGE_S3_BUCKET }}
+          bucket-region: ${{ secrets.S3_REGION }}
+          #dist-id: ${{ secrets.STAGE_CLOUDFRONT_DISTRIBUTION_ID }}
+          invalidation: /
+          delete-removed: false
