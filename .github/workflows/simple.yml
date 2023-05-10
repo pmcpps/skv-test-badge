@@ -10,6 +10,7 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
       
     steps:
       - name: Checkout
@@ -28,6 +29,11 @@ jobs:
           echo "RUNNER_TEMP = $RUNNER_TEMP"
           #mkdir $RUNNER_TEMP/build
           echo "DONE WITH JOB"
+    
+      # NOTE THAT WE MUST USE env.S3_BUCKET IN THE IF
+      - if: ${{ env.S3_BUCKET == 'bucket-skv-20230510' }}
+        run: |
+          echo 'DEPLOYING TO THE STAGING BUCKET!'
       
       - name: create test files
         run: |  
