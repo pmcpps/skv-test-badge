@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  printInputs:
+  print vars:
     runs-on: ubuntu-latest
     steps:
       - name: print env vars
@@ -14,11 +14,15 @@ jobs:
           echo "S3_BUCKET = ${{secrets.S3_BUCKET}}"
           echo "S3_BUCKET_REGION = ${{secrets.S3_BUCKET_REGION}}"
           echo "RUNNER_TEMP = $RUNNER_TEMP"
-          mkdir $RUNNER_TEMP/build
-          echo "Hello world!" > $RUNNER_TEMP/build/hello.txt
+          #mkdir $RUNNER_TEMP/build
+          mkdir build
+          echo "Hello world!" > build/hello.txt
           echo "Hello world! (2)" > ./build/hello2.txt
           echo "DONE WITH JOB"
-
+          
+      - name: Checkout
+        uses: actions/checkout@v3
+      
       - name: Deploy
         uses: reggionick/s3-deploy@v3
         with:
