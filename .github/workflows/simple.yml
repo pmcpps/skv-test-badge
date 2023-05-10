@@ -11,4 +11,6 @@ jobs:
         run: 
           echo -e "AWS_ACCESS_KEY_ID = ${{secrets.AWS_ACCESS_KEY_ID}}"
           echo -e "AWS_SECRET_ACCESS_KEY = ${{secrets.AWS_SECRET_ACCESS_KEY}}"
+          echo -e "S3_BUCKET = ${{secrets.S3_BUCKET}}"
+          echo -e "S3_BUCKET_REGION = ${{secrets.S3_BUCKET_REGION}}"
           echo -e "DONE WITH JOB"
