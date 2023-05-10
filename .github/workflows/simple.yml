@@ -4,9 +4,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  print-vars:
+  test-job:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          
       - name: print env vars
         run: |
           echo "AWS_ACCESS_KEY_ID = ${{secrets.AWS_ACCESS_KEY_ID}}"
@@ -15,17 +22,13 @@ jobs:
           echo "S3_BUCKET_REGION = ${{secrets.S3_BUCKET_REGION}}"
           echo "RUNNER_TEMP = $RUNNER_TEMP"
           #mkdir $RUNNER_TEMP/build
+          echo "DONE WITH JOB"
+      
+      - name: create test files
+        run: |  
           mkdir build
           echo "Hello world!" > build/hello.txt
           echo "Hello world! (2)" > ./build/hello2.txt
-          echo "DONE WITH JOB"
-          
-      - name: Checkout
-        uses: actions/checkout@v3
-        
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '14'
       
       - name: Deploy
         uses: reggionick/s3-deploy@v3.2.0
