@@ -7,9 +7,9 @@ jobs:
   test-job:
     runs-on: ubuntu-latest
     
-    env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #env:
+    #  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       
     steps:
       - name: Checkout
@@ -32,11 +32,11 @@ jobs:
       - name: create test files
         run: |  
           mkdir build
-          echo "Hello world! (3)" > build/hello3.txt
-          echo "Hello world! (4)" > ./build/hello4.txt
+          echo "Hello world! (5)" > build/hello5.txt
+          echo "Hello world! (6)" > ./build/hello6.txt
       
       - name: Deploy
-        uses: reggionick/s3-deploy@v3.2.0
+        uses: reggionick/s3-deploy@master
         with:
           folder: build
           bucket: ${{ secrets.S3_BUCKET }}
