@@ -71,8 +71,8 @@ jobs:
         echo "AWS_ACCESS_KEY_ID = ${{ secrets.AWS_ACCESS_KEY_ID }}"
         echo "AWS_SECRET_ACCESS_KEY = ${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         echo "SLACK_WEBHOOK_URL = ${{ secrets.SLACK_WEBHOOK_URL }}"
-        echo "GITHUB_RUN_NUMBER = ${{ env.GITHUB_RUN_NUMBER }}"
-        echo "GITHUB_WORKFLOW = ${{ env.GITHUB_WORKFLOW }}"
+        echo "GITHUB_RUN_NUMBER = ${ env.GITHUB_RUN_NUMBER }"
+        echo "GITHUB_WORKFLOW = ${ env.GITHUB_WORKFLOW }"
         echo "github.actor = ${{ github.actor }}"
         echo "github.repository = ${{ github.repository }}"
         
