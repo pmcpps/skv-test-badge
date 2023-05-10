@@ -12,6 +12,10 @@ on:
       my_token:
         description: 'The site token.'
         required: true
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      S3_BUCKET: ${{ secrets.S3_BUCKET }}
+      S3_REGION: ${{ secrets.S3_BUCKET_REGION }}
 
 jobs:
   build:
@@ -48,3 +52,14 @@ jobs:
           #key: ${{ runner.os }}-build-${{ github.sha }}
           #restore-keys: |
           #  ${{ runner.os }}-buildx-${{ github.sha }}
+          
+      - name: deploy to s3
+        uses: reggionick/s3-deploy@v3.2.0
+        with:
+          folder: build
+          bucket: ${{ secrets.S3_BUCKET }}
+          bucket-region: ${{ secrets.S3_REGION }}
+          #dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+          invalidation: /
+          delete-removed: false
+
