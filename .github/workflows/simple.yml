@@ -39,7 +39,7 @@ jobs:
         uses: reggionick/s3-deploy@v3.2.0
         with:
           folder: build
-          bucket: ${{ secrets.STAGE_S3_BUCKET }}
+          bucket: ${{ secrets.S3_BUCKET }}
           bucket-region: ${{ secrets.S3_BUCKET_REGION }}
           invalidation: /
           delete-removed: false
