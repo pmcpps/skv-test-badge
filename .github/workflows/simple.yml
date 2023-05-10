@@ -15,5 +15,5 @@ jobs:
           echo "S3_BUCKET_REGION = ${{secrets.S3_BUCKET_REGION}}"
           echo "RUNNER_TEMP = $RUNNER_TEMP"
           mkdir $RUNNER_TEMP/build
-          echo "Hello world!" > $RUNNER_TEMP/build/hello.txt"
+          echo "Hello world!" > $RUNNER_TEMP/build/hello.txt
           echo "DONE WITH JOB"
