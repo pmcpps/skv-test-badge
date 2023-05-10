@@ -52,7 +52,12 @@ jobs:
         echo "SITE_URL=${{ steps.dotenv.outputs.SITE_URL }}" >> $GITHUB_OUTPUT
         echo "RACK_ENV=${{ env.RACK_ENV }}" >> $GITHUB_OUTPUT
         echo "ENV_FILE=${{ env.ENV_FILE }}" >> $GITHUB_OUTPUT
-      id: extract_variables     
+      id: extract_variables  
+      
+    - name: Print variables
+      run: |
+        echo "GITHUB_RUN_NUMBER = ${{ env.GITHUB_RUN_NUMBER }}"
+        echo "GITHUB_WORKFLOW = ${{ env.GITHUB_WORKFLOW }}"
 
   build:
     needs: [vars]
