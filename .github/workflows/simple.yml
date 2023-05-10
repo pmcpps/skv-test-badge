@@ -34,7 +34,7 @@ jobs:
       - if: ${{ env.S3_BUCKET == 'bucket-skv-20230510' }}
         run: |
           echo 'DEPLOYING TO THE STAGING BUCKET!'
-      - if: ${{ env.S3_BUCKET !== 'bucket-skv-20230510' }}
+      - if: ${{ env.S3_BUCKET != 'bucket-skv-20230510' }}
         run: |
           echo 'DEPLOYING TO THE WRONG BUCKET!!!!'
       
