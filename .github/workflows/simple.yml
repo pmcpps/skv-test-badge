@@ -28,8 +28,8 @@ jobs:
           echo "S3_BUCKET_REGION = ${{secrets.S3_BUCKET_REGION}}"
           echo "RUNNER_TEMP = $RUNNER_TEMP"
           #mkdir $RUNNER_TEMP/build
-          echo "GITHUB_WORKFLOW = ${{ GITHUB_WORKFLOW }}"
-          echo "GITHUB_RUN_NUMBER = ${{ GITHUB_RUN_NUMBER }}"
+          echo "GITHUB_WORKFLOW = ${GITHUB_WORKFLOW}"
+          echo "GITHUB_RUN_NUMBER = ${GITHUB_RUN_NUMBER}"
           echo "DONE WITH JOB"
     
       # NOTE THAT WE MUST USE env.S3_BUCKET IN THE IF
