@@ -13,6 +13,11 @@ jobs:
       S3_BUCKET: ${{ secrets.S3_BUCKET }}
       
     steps:
+      - name: print env vars(1)
+        run: |
+          echo "GITHUB_WORKFLOW = ${GITHUB_WORKFLOW}"
+          echo "GITHUB_RUN_NUMBER = ${GITHUB_RUN_NUMBER}"
+          
       - name: Checkout
         uses: actions/checkout@v3
         
@@ -20,7 +25,7 @@ jobs:
         with:
           node-version: '14'
           
-      - name: print env vars
+      - name: print env vars(2)
         run: |
           echo "AWS_ACCESS_KEY_ID = ${{secrets.AWS_ACCESS_KEY_ID}}"
           echo "AWS_SECRET_ACCESS_KEY = ${{secrets.AWS_SECRET_ACCESS_KEY}}"
