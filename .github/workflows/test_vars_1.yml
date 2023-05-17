@@ -48,6 +48,7 @@ jobs:
         echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_OUTPUT
         #echo "MESSAGE=${{ github.event.head_commit.message }}" >> $GITHUB_OUTPUT
         echo "-----"
+        echo "-----"
         echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
         echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> $GITHUB_OUTPUT
         echo "SITE_NAME=${{ steps.dotenv.outputs.SITE_NAME }}" >> $GITHUB_OUTPUT
