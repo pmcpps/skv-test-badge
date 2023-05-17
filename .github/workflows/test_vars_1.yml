@@ -50,6 +50,7 @@ jobs:
         echo "-----"
         echo "-----"
         echo "-----"
+        echo "-----"
         echo "MESSAGE=$(git log --oneline --format=%B -n 1 HEAD | head -n 1)" >> $GITHUB_OUTPUT
         # echo "MESSAGE=$(git log --oneline -n 1 HEAD)" >> $GITHUB_OUTPUT
         # echo "MESSAGE=$(git log --format=%B -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
