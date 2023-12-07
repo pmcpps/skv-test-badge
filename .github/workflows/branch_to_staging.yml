@@ -23,7 +23,7 @@ jobs:
       RACK_ENV: ${{ env.RACK_ENV }}
       ENV_FILE: ${{ env.ENV_FILE }}
     env:
-      REPOSITORY_1: "abcd"
+      REPOSITORY_1: ${{ steps.extract_variables.outputs.REPOSITORY }}
 
     steps:
     - name: Git checkout
