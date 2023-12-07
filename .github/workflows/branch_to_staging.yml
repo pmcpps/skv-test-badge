@@ -23,7 +23,7 @@ jobs:
       RACK_ENV: ${{ env.RACK_ENV }}
       ENV_FILE: ${{ env.ENV_FILE }}
     env:
-      REPOSITORY_1: ${{ steps.extract_variables.outputs.REPOSITORY }}
+      REPOSITORY_1: ${{ github.repository }}
 
     steps:
     - name: Git checkout
