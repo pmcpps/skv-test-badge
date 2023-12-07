@@ -42,8 +42,8 @@ jobs:
       shell: bash
       run: |
         echo "REPOSITORY=${{ github.repository }}" >> $GITHUB_OUTPUT
-        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> $GITHUB_OUTPUT
         echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+        echo "LATEST_RELEASE=${{ steps.octokit.outputs.tag }}" >> $GITHUB_OUTPUT
         echo "TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
         echo "GIT_SHA=${{ github.sha }}" >> $GITHUB_OUTPUT
         echo "GIT_SHA_SHORT=$( git rev-parse --short ${{ github.sha }} )" >> $GITHUB_OUTPUT
@@ -56,6 +56,17 @@ jobs:
       
     - name: Print variables
       run: |
+        echo "REPOSITORY = $REPOSITORY"
+        echo "BRANCH = $BRANCH"
+        echo "LATEST_RELEASE = $LATEST_RELEASE"
+        echo "TAG = $TAG"
+        echo "GIT_SHA = $GIT_SHA"
+        echo "GIT_SHA_SHORT = $GIT_SHA_SHORT"
+        echo "MESSAGE = $MESSAGE"
+        echo "SITE+NAME = $SITE_NAME"
+        echo "SITE_URL = $SITE_URL"
+        echo "RACK_ENV = $RACK_ENV"
+        echo "ENV_FILE = $ENV_FILE"
         echo "GITHUB_RUN_NUMBER = $GITHUB_RUN_NUMBER"
         echo "GITHUB_WORKFLOW = $GITHUB_WORKFLOW"
 
