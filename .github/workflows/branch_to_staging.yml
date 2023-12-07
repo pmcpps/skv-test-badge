@@ -23,7 +23,7 @@ jobs:
       RACK_ENV: ${{ env.RACK_ENV }}
       ENV_FILE: ${{ env.ENV_FILE }}
     env:
-      REPOSITORY: ""
+      REPOSITORY_1: "abcd"
 
     steps:
     - name: Git checkout
@@ -58,6 +58,7 @@ jobs:
       
     - name: Print variables
       run: |
+        echo "REPOSITORY_1 = $REPOSITORY_1"
         echo "REPOSITORY = $REPOSITORY"
         echo "BRANCH = $BRANCH"
         echo "LATEST_RELEASE = $LATEST_RELEASE"
