@@ -22,6 +22,8 @@ jobs:
       SITE_NAME: ${{ steps.dotenv.outputs.SITE_NAME }}
       RACK_ENV: ${{ env.RACK_ENV }}
       ENV_FILE: ${{ env.ENV_FILE }}
+    env:
+      REPOSITORY: ""
 
     steps:
     - name: Git checkout
@@ -56,7 +58,7 @@ jobs:
       
     - name: Print variables
       run: |
-        echo $REPOSITORY
+        echo "REPOSITORY = $REPOSITORY"
         echo "BRANCH = $BRANCH"
         echo "LATEST_RELEASE = $LATEST_RELEASE"
         echo "TAG = $TAG"
