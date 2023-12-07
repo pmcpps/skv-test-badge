@@ -56,7 +56,7 @@ jobs:
       
     - name: Print variables
       run: |
-        echo "REPOSITORY = ${{ REPOSITORY }}"
+        echo "REPOSITORY = ${ REPOSITORY }"
         echo "BRANCH = $BRANCH"
         echo "LATEST_RELEASE = $LATEST_RELEASE"
         echo "TAG = $TAG"
